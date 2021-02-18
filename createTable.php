@@ -19,6 +19,7 @@ $studentSql = "CREATE TABLE IF NOT EXISTS student (
     studentID VARCHAR(10) NOT NULL PRIMARY KEY,
     studentName VARCHAR(40) NOT NULL, 
     email VARCHAR(50) NOT NULL,
+    course VARCHAR(10) NOT NULL,
     password_hash CHAR(60) NOT NULL)";
 
 

@@ -17,13 +17,14 @@
 </script>
 
 <?php
-    include "login.html";
+    include "html/login.html";
     include "dbConnection.php";
 
     if (isset($_POST["admin_login"]) || isset($_POST["teacher_login"]) || isset($_POST["student_login"])) {
         $userID = $_POST["userID"];
         $password = $_POST["password"];
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        //echo $hashed_password;
 
         if (isset($_POST["admin_login"])) {
             $loginQuery = mysqli_query($conn, "SELECT password_hash FROM admin WHERE adminID='$userID'");
@@ -40,7 +41,13 @@
                 echo "<script>show_alert('fail_username')</script>";
             } else if (password_verify($password, $password_hash[0])) {
                 echo "<script>show_alert('$userID')</script>";
-                header( "refresh:3;url=home.php" );
+                if (isset($_POST["admin_login"])) {
+                    header("refresh:3;url=adminHome.php");
+                } else if (isset($_POST["teacher_login"])) {
+                    header("refresh:3;url=teacherHome.php");
+                } else {
+                    header("refresh:3;url=studentHome.php");
+                }
             } else {
                 echo "<script>show_alert('fail_password')</script>";
             }
