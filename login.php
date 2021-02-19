@@ -42,9 +42,9 @@
             } else if (password_verify($password, $password_hash[0])) {
                 echo "<script>show_alert('$userID')</script>";
                 if (isset($_POST["admin_login"])) {
-                    header("refresh:3;url=adminHome.php");
+                    header("refresh:3;url=adminHome.php?nav=studentList");
                 } else if (isset($_POST["teacher_login"])) {
-                    header("refresh:3;url=teacherHome.php");
+                    header("refresh:3;url=teacherHome.php?");
                 } else {
                     header("refresh:3;url=studentHome.php");
                 }

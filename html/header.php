@@ -25,13 +25,13 @@
             <?php 
               if ($_SESSION["role"] == "admin") {
                 echo "<li class='nav-item active'>";
-                  echo "<a class='nav-link' href='#'>Student <span class='sr-only'>(current)</span></a>";
+                  echo "<a class='nav-link' href='adminHome.php?nav=studentList'>Student List<span class='sr-only'>(current)</span></a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                  echo "<a class='nav-link' href='#'>Teacher</a>";
+                  echo "<a class='nav-link' href='adminHome.php?nav=addTeacher'>Add Teacher</a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                  echo "<a class='nav-link' href='#'>Test</a>";
+                  echo "<a class='nav-link' href='adminHome.php?nav=viewTest'>View Test</a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
                     echo "<a class='nav-link' href='login.php'>Logout</a>";
