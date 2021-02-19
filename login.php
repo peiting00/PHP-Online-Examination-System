@@ -4,10 +4,12 @@
 
         if (status == "fail_username") {
             alertDiv.classList.add("alert-warning");
-            $(alertDiv).append("User does not exists."); 
+            $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
+                               "</button>User does not exists"); 
         } else if (status == "fail_password") {
             alertDiv.classList.add("alert-danger");
-            $(alertDiv).append("Wrong password."); 
+            $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
+                               "</button>Wrong password"); 
         } else {
             alertDiv.classList.add("alert-success");
             $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+

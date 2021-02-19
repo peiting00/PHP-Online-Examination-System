@@ -1,8 +1,19 @@
+<script type="text/javascript">
+    function show_alert(status) {
+        var alertDiv = document.getElementById("alert");
+        alertDiv.classList.add("alert-danger");
+        alertDiv.style.display="inline-block";
+        $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
+                            "</button>"+status); 
+    }
+</script>
 <style>
     .btn {
         width: 80px;
     }
 </style>
+<div class="alert" style="display: none; width: 100%;" id="alert" role="alert">
+</div>
 <div class="card">
     <div class="card-header" style="font-size: 20px; font-weight: 500;">
         Teacher List
@@ -42,6 +53,29 @@
                         $i++;
                     } while ($searchRow);
                 } else {
+                    include "dbConnection.php";
+
+                    if (isset($_POST["add"])) {
+                        $id = $_POST["teacherID"];
+                        $name = $_POST["teacherName"];
+                        $faculty = $_POST["faculty"];
+                        $email = $_POST["email"];
+                        $password = $_POST["password"];
+                        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                        $addQuery = mysqli_query($conn, "INSERT INTO teacher
+                        (teacherID, teacherName, facultyID, email, password_hash) VALUES
+                        ('$id', '$name', '$faculty', '$email', '$hashed_password')");
+
+                        if($addQuery) {
+                            $_SESSION['insert'] = "Record is added successfully!"; 
+                            mysqli_close($conn);
+                        } else {
+                            $error = mysqli_error($conn);
+                            echo "<script>show_alert(\"$error\")</script>";
+                        } 
+                    }
+
                     $teacherQuery = mysqli_query($conn, "SELECT * FROM teacher");
                     $teacherRow = mysqli_fetch_row($teacherQuery);
                     $i = 1;
@@ -59,14 +93,22 @@
                     } while ($teacherRow);
                 }
             
-            echo "</tbody>";
-            echo "<tr><td></td>";
-            echo "<td><input type='text' class='form-control' name='teacherID'/></td>";
-            echo "<td><input type='text' class='form-control' name='teacherName'/></td>";
-            echo "<td><input type='text' class='form-control' name='faculty'/></td>";
-            echo "<td><input type='text' class='form-control' name='email'/></td>";
-            echo "<td><input type='text' class='form-control' name='password'/></td>";
-            echo "<td><button class='btn btn-success' onclick=\"window.location.href='add.php'\">Add</a></button></td></tr>\n";
+                echo "</tbody>";
+                echo "<form action='adminHome.php?nav=addTeacher' method='post'>";
+                echo "<tr><td></td>";
+                echo "<td><input type='text' class='form-control' name='teacherID' required/></td>";
+                echo "<td><input type='text' class='form-control' name='teacherName' required/></td>";
+                echo "<td><select class='form-control' style='padding: 3px;' name='faculty' required>";
+                    $facultyQuery = mysqli_query($conn, "SELECT facultyID FROM faculty");
+                    if (mysqli_num_rows($facultyQuery) > 0) {
+                        while ($facultyRow = mysqli_fetch_assoc($facultyQuery)) {
+                            echo "<option value='{$facultyRow["facultyID"]}'>{$facultyRow["facultyID"]}</option>\n";
+                        }
+                    }
+                echo "</select></td>";
+                echo "<td><input type='text' class='form-control' name='email' required/></td>";
+                echo "<td><input type='text' class='form-control' name='password' required/></td>";
+                echo "<td><input type='submit' class='btn btn-success' name='add' value='Add'/></td></tr></form>\n";
             ?>
         </table>
     </div>

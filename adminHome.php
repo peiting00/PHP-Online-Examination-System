@@ -1,7 +1,7 @@
 <?php
     session_start();
     $_SESSION["role"] = "admin";
-    include "html/header.php";
+    include "header.php";
     include "dbConnection.php";
 ?>
 
@@ -15,11 +15,14 @@
         $('#teacher_table').DataTable({
             autoWidth: false,
             scrollX: true,
-            columnDefs: [{
-                            "targets": 6, 
+            columnDefs: [
+                            {"targets": 5,
+                            "width": "50%"},
+
+                            {"targets": 6, 
                             "className": "text-center",
-                            "width": "5%"
-                        }],
+                            "width": "5%"}
+                        ]
         });
     });
 </script>
@@ -62,6 +65,7 @@
         } else if ($_GET["nav"] == "viewTest") {
             include "viewTest.php";
         }
+        mysqli_close($conn);
     ?>
 </body>
 </html>

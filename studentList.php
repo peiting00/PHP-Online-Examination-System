@@ -1,4 +1,3 @@
-
 <div class="card">
     <div class="card-header" style="font-size: 20px; font-weight: 500;">
         Student List

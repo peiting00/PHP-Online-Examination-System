@@ -11,6 +11,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+<script>
+</script>
 <body>
     <!-- Image and text -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
@@ -47,7 +49,7 @@
                 echo "<li class='nav-item active'>";
                   echo "<a class='nav-link' href='#'>Take Test<span class='sr-only'>(current)</span></a>";
                 echo "</li>";
-                echo "<li class='nav-item active'>";
+                echo "<li class='nav-item'>";
                   echo "<a class='nav-link' href='#'>View History<span class='sr-only'>(current)</span></a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
