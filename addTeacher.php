@@ -4,23 +4,34 @@
         alertDiv.classList.add("alert-danger");
         alertDiv.style.display="inline-block";
         $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
-                            "</button>"+status); 
+        "</button>"+status); 
     }
-
+    
     $(document).ready(function (){
-        $(".btn").click(function() {
+        $(".editBtn").click(function() {
             var btnID = this.id;
             var id = document.getElementsByName(btnID)[0].innerHTML;
             var name = document.getElementsByName(btnID)[1].innerHTML;
             var faculty = document.getElementsByName(btnID)[2].innerHTML;
             var email = document.getElementsByName(btnID)[3].innerHTML;
             var password = document.getElementsByName(btnID)[4].innerHTML;
+            // for title
             document.getElementById("title").innerHTML = id;
-            $('#id').val(id);
+            // for all <input>
+            $('#editID').val(id);
             $('#name').val(name);
             $('#faculty').val(faculty);
             $('#email').val(email);
             $('#password').val(password);
+        });
+
+        $(".deleteBtn").click(function() {
+            var btnID = this.id;
+            var id = document.getElementsByName(btnID)[0].innerHTML;
+            // for <p>
+            document.getElementById("teacherID").innerHTML = id;
+            // for hidden <input>
+            $('#deleteID').val(id);
         });
     });
 </script>
@@ -75,8 +86,8 @@
                         echo "<td>{$searchRow[2]}</td>";
                         echo "<td>{$searchRow[3]}</td>";
                         echo "<td>{$searchRow[4]}</td>";
-                        echo "<td><button style='width: 80px;' class='btn btn-primary' data-toggle='modal' data-target='#editModal'\">Edit</a></button>";
-                        echo "<button style='width: 80px;' class='btn btn-danger'\">Delete</a></button></td>";
+                        echo "<td><button style='width: 80px;' class='editBtn btn btn-primary' id='$searchRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button>";
+                        echo "<button style='width: 80px;' class='deleteBtn btn btn-danger' id='$searchRow[0]' data-toggle='modal' data-target='#deleteModal'\">Delete</a></button></td>";
                         $searchRow = mysqli_fetch_row($searchQuery);
                         $i++;
                     } while ($searchRow);
@@ -106,7 +117,7 @@
 
                     // update teacher database
                     } else if (isset($_POST["edit"])) {
-                        $id = $_POST["id"];
+                        $id = $_POST["editID"];
                         $name = $_POST["name"];
                         $faculty = $_POST["faculty"];
                         $email = $_POST["email"];
@@ -119,6 +130,17 @@
 
                         if($updateQuery) {
                             $_SESSION['update'] = "Record is updated successfully!"; 
+                        } else {
+                            echo mysqli_error($conn);
+                        }
+
+                    // delete record
+                    } else if (isset($_POST["delete"])) {
+                        $id = $_POST["deleteID"];
+                        $deleteQuery = mysqli_query($conn, "DELETE FROM teacher WHERE teacherID='$id'");
+
+                        if($deleteQuery) {
+                            $_SESSION['delete'] = "Record is deleted sucessfully!"; 
                         } else {
                             echo mysqli_error($conn);
                         }
@@ -135,8 +157,8 @@
                         echo "<td name='$teacherRow[0]'>{$teacherRow[2]}</td>";
                         echo "<td name='$teacherRow[0]'>{$teacherRow[3]}</td>";
                         echo "<td name='$teacherRow[0]'>{$teacherRow[4]}</td>";
-                        echo "<td><button style='width: 80px;' class='btn btn-primary' id='$teacherRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button>";
-                        echo "<button style='width: 80px;' id='$teacherRow[0]' class='btn btn-danger'\">Delete</a></button></td>";
+                        echo "<td><button style='width: 80px;' class='editBtn btn btn-primary' id='$teacherRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button>";
+                        echo "<button style='width: 80px;' class='deleteBtn btn btn-danger' id='$teacherRow[0]' data-toggle='modal' data-target='#deleteModal'\">Delete</a></button></td>";
                         $teacherRow = mysqli_fetch_row($teacherQuery);
                         $i++;
                     } while ($teacherRow);
@@ -160,9 +182,10 @@
                 echo "<td><input type='text' class='form-control' name='password' required/></td>";
                 echo "<td><input style='width: 80px;' type='submit' class='btn btn-success' name='add' value='Add'/></td></tr></form>\n";
             ?>
+        </table>
 
-            <!-- Edit Model -->
-            <div id="editModal" class="modal fade" role="dialog">
+        <!-- Edit Model -->
+        <div id="editModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -173,7 +196,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="adminHome.php?nav=addTeacher" method="post">
-                        <input name="id" id="id" style="display: none;">
+                        <input name="editID" id="editID" style="display: none;"/>
                         <div class="input">
                             <label class="modalLabel" for="name">Name</label>
                             <input type="text" class="form-control" name="name" id="name" required>
@@ -201,12 +224,36 @@
                         </div>
                         <div class="modal-footer">
                             <input type="submit" name="edit" class="btn btn-success" value="Edit"/>
-                            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close"/>
+                            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel"/>
                         </div>
                     </form>
                 </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Delete Modal -->
+        <div id="deleteModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p style="float: left;">Are you sure to delete&nbsp;</p><p id="teacherID"></p>
+                </div>
+                <div class="modal-footer">
+                    <form action="adminHome.php?nav=addTeacher" method="post">
+                        <input name="deleteID" id="deleteID" style="display: none;"/>
+                        <input type="submit" name="delete" class="btn btn-success" value="Yes"/>
+                        <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel"/>
+                    </form>
+                </div>
+                </div>
+
             </div>
-        </table>
+        </div>
+    </div>
 </div>
