@@ -58,6 +58,7 @@
 <body>
 <br>
     <?php 
+        // menu 
         if ($_GET["nav"] == "studentList") {
             include "studentList.php";
         } else if ($_GET["nav"] == "addTeacher") {

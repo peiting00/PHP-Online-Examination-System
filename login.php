@@ -38,6 +38,7 @@
 
         $password_hash = mysqli_fetch_row($loginQuery);
         
+        // show alert
         if($loginQuery) {
             if ($password_hash[0] == "") {
                 echo "<script>show_alert('fail_username')</script>";
