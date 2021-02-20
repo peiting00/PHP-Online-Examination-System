@@ -1,10 +1,25 @@
 <script type="text/javascript">
     function show_alert(status) {
         var alertDiv = document.getElementById("alert");
-        alertDiv.classList.add("alert-danger");
         alertDiv.style.display="inline-block";
-        $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
-        "</button>"+status); 
+        if (status == "add") {
+            alertDiv.classList.add("alert-success");
+            $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
+            "</button>"+"Record addedd successfully!"); 
+        } else if (status == "update") {
+            alertDiv.classList.add("alert-success");
+            $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
+            "</button>"+"Record updated successfully!"); 
+        } else if (status == "delete") {
+            alertDiv.classList.add("alert-success");
+            $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
+            "</button>"+"Record deleted successfully!"); 
+        } else {
+            alertDiv.classList.add("alert-danger");
+            alertDiv.style.display="inline-block";
+            $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
+            "</button>"+status);
+        } 
     }
     
     $(document).ready(function (){
@@ -108,8 +123,7 @@
                         ('$id', '$name', '$faculty', '$email', '$hashed_password')");
 
                         if($addQuery) {
-                            $_SESSION['insert'] = "Record is added successfully!"; 
-                            mysqli_close($conn);
+                            echo "<script>show_alert('add')</script>";
                         } else {
                             $error = mysqli_error($conn);
                             echo "<script>show_alert(\"$error\")</script>";
@@ -129,9 +143,10 @@
                                 WHERE teacherID='$id'");
 
                         if($updateQuery) {
-                            $_SESSION['update'] = "Record is updated successfully!"; 
+                            echo "<script>show_alert('update')</script>";
                         } else {
-                            echo mysqli_error($conn);
+                            $error = mysqli_error($conn);
+                            echo "<script>show_alert(\"$error\")</script>";
                         }
 
                     // delete record
@@ -140,9 +155,10 @@
                         $deleteQuery = mysqli_query($conn, "DELETE FROM teacher WHERE teacherID='$id'");
 
                         if($deleteQuery) {
-                            $_SESSION['delete'] = "Record is deleted sucessfully!"; 
+                            echo "<script>show_alert('delete')</script>"; 
                         } else {
-                            echo mysqli_error($conn);
+                            $error = mysqli_error($conn);
+                            echo "<script>show_alert(\"$error\")</script>";
                         }
                     }
 
