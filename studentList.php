@@ -15,36 +15,18 @@
             </thead>
             <tbody>
             <?php
-                if (isset($_GET["search"])) {
-                    $searchTerm = mysqli_real_escape_string($conn, htmlspecialchars($_GET["search"]));
-                    $searchQuery = mysqli_query($conn, "SELECT * FROM student WHERE studentID='$searchTerm' OR 
-                                                studentName='$searchTerm' OR email='$searchTerm' OR course='$searchTerm'");
-                    $searchRow = mysqli_fetch_row($searchQuery); 
-                    $i = 1;
-
-                    do {
-                        echo "<tr><td>$i</td>";
-                        echo "<td>{$searchRow[0]}</td>";
-                        echo "<td>{$searchRow[1]}</td>";
-                        echo "<td>{$searchRow[2]}</td>";
-                        echo "<td>{$searchRow[3]}</td>";
-                        $searchRow = mysqli_fetch_row($searchQuery);
-                        $i++;
-                    } while ($searchRow);
-                } else {
-                    $studentQuery = mysqli_query($conn, "SELECT * FROM student");
+                $studentQuery = mysqli_query($conn, "SELECT * FROM student");
+                $studentRow = mysqli_fetch_row($studentQuery);
+                $i = 1;
+                do {
+                    echo "<tr><td>$i</td>";
+                    echo "<td>{$studentRow[0]}</td>";
+                    echo "<td>{$studentRow[1]}</td>";
+                    echo "<td>{$studentRow[2]}</td>";
+                    echo "<td>{$studentRow[3]}</td>";
                     $studentRow = mysqli_fetch_row($studentQuery);
-                    $i = 1;
-                    do {
-                        echo "<tr><td>$i</td>";
-                        echo "<td>{$studentRow[0]}</td>";
-                        echo "<td>{$studentRow[1]}</td>";
-                        echo "<td>{$studentRow[2]}</td>";
-                        echo "<td>{$studentRow[3]}</td>";
-                        $studentRow = mysqli_fetch_row($studentQuery);
-                        $i++;
-                    } while ($studentRow);
-                }
+                    $i++;
+                } while ($studentRow);
             ?>
             </tbody>
         </table>

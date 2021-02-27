@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login Page</title>
-    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">--> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> 
     <link rel="stylesheet" href="css/header.css">
     <!-- Rotobo Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
@@ -30,10 +30,10 @@
                   echo "<a class='nav-link' href='adminHome.php?nav=studentList'>Student List<span class='sr-only'>(current)</span></a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                  echo "<a class='nav-link' href='adminHome.php?nav=addTeacher'>Add Teacher</a>";
+                  echo "<a class='nav-link' href='adminHome.php?nav=teacherList'>Teacher List</a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                  echo "<a class='nav-link' href='adminHome.php?nav=viewTest'>View Test</a>";
+                  echo "<a class='nav-link' href='adminHome.php?nav=examList'>Exam List</a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
                     echo "<a class='nav-link' href='login.php'>Logout</a>";

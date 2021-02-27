@@ -86,103 +86,82 @@
             </thead>
             <tbody>
             <?php
-                // search teacher
-                if (isset($_GET["search"])) {
-                    $searchTerm = mysqli_real_escape_string($conn, htmlspecialchars($_GET["search"]));
-                    $searchQuery = mysqli_query($conn, "SELECT * FROM teacher WHERE teacherID='$searchTerm' OR 
-                                                teacherName='$searchTerm' OR facultyID='$searchTerm' OR email='$searchTerm'");
-                    $searchRow = mysqli_fetch_row($searchQuery); 
-                    $i = 1;
 
-                    do {
-                        echo "<tr><td>$i</td>";
-                        echo "<td>{$searchRow[0]}</td>";
-                        echo "<td>{$searchRow[1]}</td>";
-                        echo "<td>{$searchRow[2]}</td>";
-                        echo "<td>{$searchRow[3]}</td>";
-                        echo "<td>{$searchRow[4]}</td>";
-                        echo "<td><button style='width: 80px;' class='editBtn btn btn-primary' id='$searchRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button>";
-                        echo "<button style='width: 80px;' class='deleteBtn btn btn-danger' id='$searchRow[0]' data-toggle='modal' data-target='#deleteModal'\">Delete</a></button></td>";
-                        $searchRow = mysqli_fetch_row($searchQuery);
-                        $i++;
-                    } while ($searchRow);
-                } else {
-                    include "dbConnection.php";
+                include "dbConnection.php";
 
-                    // add teacher to database
-                    if (isset($_POST["add"])) {
-                        $id = $_POST["teacherID"];
-                        $name = $_POST["teacherName"];
-                        $faculty = $_POST["faculty"];
-                        $email = $_POST["email"];
-                        $password = $_POST["password"];
-                        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                // add teacher to database
+                if (isset($_POST["add"])) {
+                    $id = $_POST["teacherID"];
+                    $name = $_POST["teacherName"];
+                    $faculty = $_POST["faculty"];
+                    $email = $_POST["email"];
+                    $password = $_POST["password"];
+                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                        $addQuery = mysqli_query($conn, "INSERT INTO teacher
-                        (teacherID, teacherName, facultyID, email, password_hash) VALUES
-                        ('$id', '$name', '$faculty', '$email', '$hashed_password')");
+                    $addQuery = mysqli_query($conn, "INSERT INTO teacher
+                    (teacherID, teacherName, facultyID, email, password_hash) VALUES
+                    ('$id', '$name', '$faculty', '$email', '$hashed_password')");
 
-                        if($addQuery) {
-                            echo "<script>show_alert('add')</script>";
-                        } else {
-                            $error = mysqli_error($conn);
-                            echo "<script>show_alert(\"$error\")</script>";
-                        } 
+                    if($addQuery) {
+                        echo "<script>show_alert('add')</script>";
+                    } else {
+                        $error = mysqli_error($conn);
+                        echo "<script>show_alert(\"$error\")</script>";
+                    } 
 
-                    // update teacher database
-                    } else if (isset($_POST["edit"])) {
-                        $id = $_POST["editID"];
-                        $name = $_POST["name"];
-                        $faculty = $_POST["faculty"];
-                        $email = $_POST["email"];
-                        $password = $_POST["password"];
-                        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                // update teacher database
+                } else if (isset($_POST["edit"])) {
+                    $id = $_POST["editID"];
+                    $name = $_POST["name"];
+                    $faculty = $_POST["faculty"];
+                    $email = $_POST["email"];
+                    $password = $_POST["password"];
+                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                        $updateQuery = mysqli_query($conn,"UPDATE teacher
-                                SET teacherName='$name', facultyID='$faculty', email='$email', password_hash='$hashed_password'
-                                WHERE teacherID='$id'");
+                    $updateQuery = mysqli_query($conn,"UPDATE teacher
+                            SET teacherName='$name', facultyID='$faculty', email='$email', password_hash='$hashed_password'
+                            WHERE teacherID='$id'");
 
-                        if($updateQuery) {
-                            echo "<script>show_alert('update')</script>";
-                        } else {
-                            $error = mysqli_error($conn);
-                            echo "<script>show_alert(\"$error\")</script>";
-                        }
-
-                    // delete record
-                    } else if (isset($_POST["delete"])) {
-                        $id = $_POST["deleteID"];
-                        $deleteQuery = mysqli_query($conn, "DELETE FROM teacher WHERE teacherID='$id'");
-
-                        if($deleteQuery) {
-                            echo "<script>show_alert('delete')</script>"; 
-                        } else {
-                            $error = mysqli_error($conn);
-                            echo "<script>show_alert(\"$error\")</script>";
-                        }
+                    if($updateQuery) {
+                        echo "<script>show_alert('update')</script>";
+                    } else {
+                        $error = mysqli_error($conn);
+                        echo "<script>show_alert(\"$error\")</script>";
                     }
 
-                    // load teacher list
-                    $teacherQuery = mysqli_query($conn, "SELECT * FROM teacher");
-                    $teacherRow = mysqli_fetch_row($teacherQuery);
-                    $i = 1;
-                    do {
-                        echo "<tr><td>$i</td>";
-                        echo "<td name='$teacherRow[0]'>{$teacherRow[0]}</td>";
-                        echo "<td name='$teacherRow[0]'>{$teacherRow[1]}</td>";
-                        echo "<td name='$teacherRow[0]'>{$teacherRow[2]}</td>";
-                        echo "<td name='$teacherRow[0]'>{$teacherRow[3]}</td>";
-                        echo "<td name='$teacherRow[0]'>{$teacherRow[4]}</td>";
-                        echo "<td><button style='width: 80px;' class='editBtn btn btn-primary' id='$teacherRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button>";
-                        echo "<button style='width: 80px;' class='deleteBtn btn btn-danger' id='$teacherRow[0]' data-toggle='modal' data-target='#deleteModal'\">Delete</a></button></td>";
-                        $teacherRow = mysqli_fetch_row($teacherQuery);
-                        $i++;
-                    } while ($teacherRow);
+                // delete record
+                } else if (isset($_POST["delete"])) {
+                    $id = $_POST["deleteID"];
+                    $deleteQuery = mysqli_query($conn, "DELETE FROM teacher WHERE teacherID='$id'");
+
+                    if($deleteQuery) {
+                        echo "<script>show_alert('delete')</script>"; 
+                    } else {
+                        $error = mysqli_error($conn);
+                        echo "<script>show_alert(\"$error\")</script>";
+                    }
                 }
+
+                // load teacher list
+                $teacherQuery = mysqli_query($conn, "SELECT * FROM teacher");
+                $teacherRow = mysqli_fetch_row($teacherQuery);
+                $i = 1;
+                do {
+                    echo "<tr><td>$i</td>";
+                    echo "<td name='$teacherRow[0]'>{$teacherRow[0]}</td>";
+                    echo "<td name='$teacherRow[0]'>{$teacherRow[1]}</td>";
+                    echo "<td name='$teacherRow[0]'>{$teacherRow[2]}</td>";
+                    echo "<td name='$teacherRow[0]'>{$teacherRow[3]}</td>";
+                    echo "<td name='$teacherRow[0]'>{$teacherRow[4]}</td>";
+                    echo "<td><button style='width: 80px;' class='editBtn btn btn-primary' id='$teacherRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button>";
+                    echo "<button style='width: 80px;' class='deleteBtn btn btn-danger' id='$teacherRow[0]' data-toggle='modal' data-target='#deleteModal'\">Delete</a></button></td>";
+                    $teacherRow = mysqli_fetch_row($teacherQuery);
+                    $i++;
+                } while ($teacherRow);
             
                 // add teacher form
                 echo "</tbody>";
-                echo "<form action='adminHome.php?nav=addTeacher' method='post'>";
+                echo "<form action='adminHome.php?nav=teacherList' method='post'>";
                 echo "<tr><td></td>";
                 echo "<td><input type='text' class='form-control' name='teacherID' required/></td>";
                 echo "<td><input type='text' class='form-control' name='teacherName' required/></td>";
@@ -211,7 +190,7 @@
 
                 </div>
                 <div class="modal-body">
-                    <form action="adminHome.php?nav=addTeacher" method="post">
+                    <form action="adminHome.php?nav=teacherList" method="post">
                         <input name="editID" id="editID" style="display: none;"/>
                         <div class="input">
                             <label class="modalLabel" for="name">Name</label>
@@ -261,7 +240,7 @@
                     <p style="float: left;">Are you sure to delete&nbsp;</p><p id="teacherID"></p>
                 </div>
                 <div class="modal-footer">
-                    <form action="adminHome.php?nav=addTeacher" method="post">
+                    <form action="adminHome.php?nav=teacherList" method="post">
                         <input name="deleteID" id="deleteID" style="display: none;"/>
                         <input type="submit" name="delete" class="btn btn-success" value="Yes"/>
                         <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel"/>
