@@ -28,6 +28,16 @@
             scrollX: true
         });
 
+        $('#result_table').DataTable({
+            "autoWidth": false,
+            scrollX: true
+        });
+
+        $('#detail_table').DataTable({
+            autoWidth: false,
+            scrollX: true
+        });
+
     });
 </script>
 

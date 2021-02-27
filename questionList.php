@@ -28,40 +28,21 @@
             </thead>
             <tbody>
             <?php
-                if (isset($_GET["search"])) {
-                    $searchTerm = mysqli_real_escape_string($conn, htmlspecialchars($_GET["search"]));
-                    $searchQuery = mysqli_query($conn, "SELECT * FROM question WHERE question='$searchTerm'");
-                    $searchRow = mysqli_fetch_row($searchQuery); 
-                    $i = 1;
-
-                    do {
-                        echo "<tr><td>$i</td>";
-                        echo "<td>{$searchRow[0]}</td>";
-                        echo "<td>{$searchRow[1]}</td>";
-                        echo "<td>{$searchRow[2]}</td>";
-                        echo "<td>{$searchRow[3]}</td>";
-                        echo "<td>{$searchRow[4]}</td>";
-                        echo "<td>{$searchRow[5]}</td>";
-                        $searchRow = mysqli_fetch_row($searchQuery);
-                        $i++;
-                    } while ($searchRow);
-                } else {
-                    $questionQuery = mysqli_query($conn, "SELECT question, option1, option2,
-                                                option3, option4, answer FROM question WHERE examID='$id'");
+                $questionQuery = mysqli_query($conn, "SELECT question, option1, option2,
+                                            option3, option4, answer FROM question WHERE examID='$id'");
+                $questionRow = mysqli_fetch_row($questionQuery);
+                $i = 1;
+                do {
+                    echo "<tr><td>$i</td>";
+                    echo "<td>{$questionRow[0]}</td>";
+                    echo "<td>{$questionRow[1]}</td>";
+                    echo "<td>{$questionRow[2]}</td>";
+                    echo "<td>{$questionRow[3]}</td>";
+                    echo "<td>{$questionRow[4]}</td>";
+                    echo "<td>{$questionRow[5]}</td>";
                     $questionRow = mysqli_fetch_row($questionQuery);
-                    $i = 1;
-                    do {
-                        echo "<tr><td>$i</td>";
-                        echo "<td>{$questionRow[0]}</td>";
-                        echo "<td>{$questionRow[1]}</td>";
-                        echo "<td>{$questionRow[2]}</td>";
-                        echo "<td>{$questionRow[3]}</td>";
-                        echo "<td>{$questionRow[4]}</td>";
-                        echo "<td>{$questionRow[5]}</td>";
-                        $questionRow = mysqli_fetch_row($questionQuery);
-                        $i++;
-                    } while ($questionRow);
-                }
+                    $i++;
+                } while ($questionRow);
             ?>
             </tbody>
         </table>

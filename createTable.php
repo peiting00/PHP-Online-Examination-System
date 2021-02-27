@@ -59,13 +59,15 @@ $questionSql = "CREATE TABLE IF NOT EXISTS question (
 $resultSql = "CREATE TABLE IF NOT EXISTS result (
     resultID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     studentID VARCHAR(10) NOT NULL,
+    examID int NOT NULL,
     questionID int NOT NULL,
     studentAns VARCHAR(50) NOT NULL,
     correctAns VARCHAR(50) NOT NULL,
     result VARCHAR(10) NOT NULL,
     marks FLOAT(10) NOT NULL,
     FOREIGN KEY (studentID) REFERENCES student(studentID),
-    FOREIGN KEY (questionID) REFERENCES question(questionID)";
+    FOREIGN KEY (examID) REFERENCES exam(examID),
+    FOREIGN KEY (questionID) REFERENCES question(questionID))";
     
 if (mysqli_query($conn, $courseSql) && mysqli_query($conn, $facultySql) && mysqli_query($conn, $adminSql) && mysqli_query($conn, $teacherSql) && mysqli_query($conn, $studentSql)
     && mysqli_query($conn, $examSql) && mysqli_query($conn, $questionSql) && mysqli_query($conn, $resultSql)) {
