@@ -52,7 +52,7 @@
                         setcookie('passwordcookie', $password, time()+86400);
                     }
                     $_SESSION["username"]= $userID;
-                    header("location:adminHome.php?nav=studentList");
+                    header("refresh:3;url=adminHome.php?nav=studentList");
                 } else if (isset($_POST["teacher_login"])) {
                     if(isset($_POST["remember_me"])){  
                         setcookie('usernamecookie', $userID, time()+86400); //86400 = 1 day
