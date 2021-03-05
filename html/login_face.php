@@ -51,3 +51,16 @@
         </div>
     </body>
 </html>
+
+<?php
+
+    if(isset($_COOKIE['usernamecookie']) and isset($_COOKIE['passwordcookie'])){
+        $user = $_COOKIE['usernamecookie'];
+        $pass = $_COOKIE['passwordcookie'];
+        echo "<script>
+            document.getElementById('userID').value = '$user';
+            document.getElementById('password').value = '$pass';
+            </script>";
+    }
+
+?>

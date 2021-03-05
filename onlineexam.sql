@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2021 at 10:56 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: Mar 05, 2021 at 04:49 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -86,16 +85,18 @@ CREATE TABLE `exam` (
   `duration` int(5) NOT NULL,
   `totalQuestion` int(5) NOT NULL,
   `rightAnsMark` float NOT NULL,
-  `wrongAnsMark` float NOT NULL
+  `wrongAnsMark` float NOT NULL,
+  `teacherID` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `exam`
 --
 
-INSERT INTO `exam` (`examID`, `examTitle`, `courseID`, `date`, `time`, `duration`, `totalQuestion`, `rightAnsMark`, `wrongAnsMark`) VALUES
-(1, 'PHP Quiz 1', 'BCSI', '2021-02-26', '14:10:00', 20, 10, 1.5, -2),
-(2, 'Life Process Quiz', 'FIS', '2021-02-25', '13:20:00', 20, 10, 1, -1.5);
+INSERT INTO `exam` (`examID`, `examTitle`, `courseID`, `date`, `time`, `duration`, `totalQuestion`, `rightAnsMark`, `wrongAnsMark`, `teacherID`) VALUES
+(1, 'PHP Quiz 1', 'BCSI', '2021-02-26', '14:10:00', 20, 10, 1.5, -2, 'teacher05'),
+(2, 'Life Process Quiz', 'FIS', '2021-02-25', '13:20:00', 20, 10, 1, -1.5, 'teacher06'),
+(3, 'Web Programming With PHP ', 'BITI', '2021-03-05', '10:00:00', 15, 2, 2, -2, 'teacher05');
 
 -- --------------------------------------------------------
 
@@ -159,7 +160,9 @@ INSERT INTO `question` (`questionID`, `examID`, `question`, `option1`, `option2`
 (17, 2, 'The contraction and expansion movement of the walls of the food pipe is called:', 'translocation', 'transpiration', 'peristaltic movement', 'digestion', 'peristaltic movement'),
 (18, 2, 'The exit of unabsorbed food material is regu-lated by', 'liver', 'anus', 'small intestine', 'anal sphincter', 'anal sphincter'),
 (19, 2, 'What are the products obtained by anaerobic respiration in plants?', 'Lactic acid + Energy', 'Carbon dioxide + Water + Energy', 'Ethanol + Carbon dioxide + Energy', 'Pyruvate', 'Ethanol + Carbon dioxide + Energy'),
-(20, 2, 'The breakdown of pyruvate to give carbon di-oxide, water and energy takes place in', 'cytoplasm', 'mitochondria', 'chloroplast', 'nucleus', 'nucleus');
+(20, 2, 'The breakdown of pyruvate to give carbon di-oxide, water and energy takes place in', 'cytoplasm', 'mitochondria', 'chloroplast', 'nucleus', 'nucleus'),
+(23, 3, 'Which of the following is the incorrect way to declare a PHP variable?', '$aVariable;', '$a_Variable = 9;', '$AVariable;', '$a Variable;', '$a Variable;'),
+(24, 3, 'Which of the following is the incorrect way to declare a PHP variable?', '$a_Number = 9', '$a_Number = 9;', '$a_Num = 9;', '$aNumber = 9;', '$a_Number = 9');
 
 -- --------------------------------------------------------
 
@@ -272,6 +275,28 @@ INSERT INTO `teacher` (`teacherID`, `teacherName`, `facultyID`, `email`, `passwo
 ('teacher18', 'teacher_18', 'FOBCAL', 'teacher18@gmail.com', '$2y$10$GHXGwtqQ/5w.koDUqUvHvumXoXvbTbYUvuwhrTlbkQRxKq5ZRwcM6'),
 ('teacher19', 'teacher_19', 'FHLS', 'teacher19@gmail.com', '$2y$10$OAIjtxlyefwfBNldbglrAeHBHEYs/5aNoFpa5zIOjx9XY6fiecCsi');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_course`
+--
+
+CREATE TABLE `teacher_course` (
+  `tc_course` int(30) NOT NULL,
+  `teacherID` varchar(30) NOT NULL,
+  `courseID` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teacher_course`
+--
+
+INSERT INTO `teacher_course` (`tc_course`, `teacherID`, `courseID`) VALUES
+(1, 'teacher05', 'BCSI'),
+(2, 'teacher05', 'DIA'),
+(3, 'teacher05', 'BITI'),
+(4, 'teacher05', 'DIB');
+
 --
 -- Indexes for dumped tables
 --
@@ -332,6 +357,14 @@ ALTER TABLE `teacher`
   ADD KEY `facultyID` (`facultyID`);
 
 --
+-- Indexes for table `teacher_course`
+--
+ALTER TABLE `teacher_course`
+  ADD PRIMARY KEY (`tc_course`),
+  ADD KEY `teacherID` (`teacherID`),
+  ADD KEY `courseID` (`courseID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -339,19 +372,25 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `examID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `examID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `questionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `questionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
   MODIFY `resultID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `teacher_course`
+--
+ALTER TABLE `teacher_course`
+  MODIFY `tc_course` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
