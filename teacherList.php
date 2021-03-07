@@ -5,7 +5,7 @@
         if (status == "add") {
             alertDiv.classList.add("alert-success");
             $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
-            "</button>"+"Record addedd successfully!"); 
+            "</button>"+"Record added successfully!"); 
         } else if (status == "update") {
             alertDiv.classList.add("alert-success");
             $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
