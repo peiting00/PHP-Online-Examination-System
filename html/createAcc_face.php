@@ -1,3 +1,6 @@
+<?php
+include "dbConnection.php";
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,8 +26,9 @@
             </div>
             <div class="container col-md-6">
                 <div class="form-block">
-                    <h3><strong>Registration Page</strong></h3>
-                    <form action="login.php" name="login" method="post">
+                    <h3><strong>Online Examination Registration</strong></h3>
+                    <form action="createAcc.php" name="login" method="post">
+                        
                         <div class="form-group">
                             <label for="userID">Student ID</label>
                             <input type="text" class="form-control" placeholder="Your Student ID" name="studentID" id="studentID" required>
@@ -34,12 +38,21 @@
                             <input type="text" class="form-control" placeholder="Your Full Name" name="studentName" id="studentName" required>
                         </div>
                         <div class="form-group">
-                            <label for="userID">Course </label>
-                            <input type="text" class="form-control" placeholder="Your Course Code" name="course" id="course" required>
+                            <label for="course">Course ID </label>
+                            <select id="courseID" class="form-control" name="courseID">
+                            <option value="invalid" disabled selected>Choose your course ID</option>
+                            <?php 
+                            $courseID=mysqli_query($conn,"SELECT courseID from course");
+                            while($id=mysqli_fetch_array($courseID)){
+                                echo "<option value='".$id['courseID']."'class='form-control'>".$id['courseID']."</option>";
+                            }
+                            ?>
+                            </select>
+                            
                         </div>
                         <div class="form-group">
                             <label for="userID">Email</label>
-                            <input type="text" class="form-control" placeholder="Your Email" name="email" id="email" required>
+                            <input type="email" class="form-control" placeholder="Your Email" name="email" id="email" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
@@ -54,13 +67,16 @@
                             <p id="number" class="invalid">A <b>number</b></p>
                             <p id="length" class="invalid" >Minimum <b>8 characters</b></p>
                         </div>
-                        
                         <div class="form-group">
-                            <span>New student?</span>
-                            <span><a href="createAcc.php" class="create-acc">Create An Account</a></span> 
+                            <label for="password">Confirm Password <span style="color:red">*</span></label>
+                            <input type="password" class="form-control" id="password2" name="password2"  placeholder="Re-enter your password " required>
+                        </div>
+                        <div class="form-group">
+                            <span>Have an account already?</span>
+                            <span><a href="login.php" class="create-acc">Click me to login</a></span> 
                         </div>
                         
-                        <input type="submit" name="student_login" value="Student Login" class="btn btn-block">
+                        <input type="submit" name="register" value="Register" class="btn btn-block">
                     </form>
                 </div>
             </div>
