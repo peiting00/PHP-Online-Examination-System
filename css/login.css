@@ -93,3 +93,40 @@ input[type='checkbox'] {
     width: 40%;
     font-size: 14px;
 }
+
+/*CREATE ACCOUNT CSS */
+/* The message box is shown when the user clicks on the password field */
+.message{
+    position:relative;
+    padding:10px;
+    margin-top:5px;
+    font-size:5px;
+}
+  
+.message p{
+    padding: 0px 15px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid{
+    color:green;
+}
+  
+.valid:before{
+    content:"\2714";
+    /*content:"✔"; /*tick*/
+    left: -10px;
+    position:relative;
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid{
+    color:red;
+}
+  
+.invalid:before{ /* add symbol*/
+    position:relative;
+    left:-10px;
+    /*content:"✖";/*cross*/
+    content:"\2715";/*cross*/
+}
