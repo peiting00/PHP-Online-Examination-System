@@ -95,7 +95,8 @@ CREATE TABLE IF NOT EXISTS `exam` (
 INSERT INTO `exam` (`examID`, `examTitle`, `courseID`, `date`, `time`, `duration`, `totalQuestion`, `rightAnsMark`, `wrongAnsMark`, `teacherID`) VALUES
 (1, 'PHP Quiz 1', 'BCSI', '2021-02-26', '14:10:00', 20, 10, 1.5, -2, 'teacher05'),
 (2, 'Life Process Quiz', 'FIS', '2021-02-25', '13:20:00', 20, 10, 1, -1.5, 'teacher06'),
-(3, 'Web Programming With PHP ', 'BITI', '2021-03-05', '10:00:00', 15, 2, 2, -2, 'teacher05');
+(3, 'Web Programming With PHP ', 'BITI', '2021-03-05', '10:00:00', 15, 2, 2, -2, 'teacher05'),
+(4, 'Online Quiz-1 PHP ', 'BCSI', '2021-05-05', '10:00:00', 20, 10, 1.5, -2, 'teacher05');
 
 -- --------------------------------------------------------
 
@@ -184,7 +185,19 @@ INSERT INTO `question` (`questionID`, `examID`, `question`, `option1`, `option2`
 (19, 2, 'What are the products obtained by anaerobic respiration in plants?', 'Lactic acid + Energy', 'Carbon dioxide + Water + Energy', 'Ethanol + Carbon dioxide + Energy', 'Pyruvate', 'Ethanol + Carbon dioxide + Energy'),
 (20, 2, 'The breakdown of pyruvate to give carbon di-oxide, water and energy takes place in', 'cytoplasm', 'mitochondria', 'chloroplast', 'nucleus', 'nucleus'),
 (23, 3, 'Which of the following is the incorrect way to declare a PHP variable?', '$aVariable;', '$a_Variable = 9;', '$AVariable;', '$a Variable;', '$a Variable;'),
-(24, 3, 'Which of the following is the incorrect way to declare a PHP variable?', '$a_Number = 9', '$a_Number = 9;', '$a_Num = 9;', '$aNumber = 9;', '$a_Number = 9');
+(24, 3, 'Which of the following is the incorrect way to declare a PHP variable?', '$a_Number = 9', '$a_Number = 9;', '$a_Num = 9;', '$aNumber = 9;', '$a_Number = 9'),
+(25, 4, 'Which of the following is used to declare a constant?', 'const', 'constant', 'define', 'D#pragma', 'define'),
+(26, 4, 'Which of the following is the way to create comments in PHP?', '// commented code to end of line', '/* commented code here */', '# commented code to end of line', 'all of the above', 'all of the above'),
+(27, 4, 'Which of the following is NOT a valid PHP comparison operator?', '!=', ' >=', '<=>', '<>', '<=>'),
+(28, 4, 'Which of the following is NOT a magic predefined constant?', '__LINE__', '__FILE__', '__DATE__ ', '__CLASS__', '__DATE__ '),
+(29, 4, 'What is the strpos() function used for?', 'Find the last character of a string', 'Both b and c', 'Search for character within a string','Locate position of a string’s first character', 'Search for character within a string'),
+(30, 4, 'What is the difference between GET and POST method?', 'GET displays the form values entered in the URL of the address bar where as POST does not', 'POST displays the form values entered in the URL of the address bar where as GET does not.', 'There is no difference', 'None of above', 'GET displays the form values entered in the URL of the address bar where as POST does not'),
+(31, 4, '____________ function in PHP Returns a list of response headers sent (or ready to send)', 'header()', 'headers_list()', ' header_sent()', 'header_send(', 'headers_list()'),
+(32, 4, 'What is array_keys() used for?', 'Compares array keys, and returns the matches', 'Checks if the specified key exists in the array', 'Returns all the keys of an array ', 'Both b and c above', 'Returns all the keys of an array'),
+(33, 4, 'How do I create PHP arrays in a HTML <form>?', '< input name= MyArray[]/>', '< input ="MyArray[]" />', '< input name="MyArray[]" />', '< input MyArray[] />', '< input name="MyArray[]" />'),
+(34, 4, 'What is the difference between echo and print?', 'They both behave the same.', 'Print can take multiple parameters where as echo cannot', 'Echo can take multiple parameters where as print cannot', 'Print is a function where as echo is not.', 'Echo can take multiple parameters where as print cannot');
+
+
 
 -- --------------------------------------------------------
 
