@@ -5,7 +5,18 @@
     $ex_id = $_GET["id"];
     $username = $_SESSION['user'];
 ?>
-
+<script>
+function goBack() {
+  window.history.back();
+}
+$(document).ready(function(){
+  $("button").hover(function(){
+    $(this).css("background-color", "#0066cc");
+    }, function(){
+    $(this).css("background-color", "#0080ff");
+  });
+});
+</script>
 <br>
 <div class="card">
     <div class="card-header" style="font-size: 20px; font-weight: 500;">
@@ -51,5 +62,6 @@
             ?>
             </tbody>
         </table>
+        <button onclick="goBack()" style="background-color: #0080ff; color:#FDFEFE; width:95; height:40; border-radius: 5px; border: 1px #3498DB; float: right;">Go Back</button>
     </div>
 </div>
