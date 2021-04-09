@@ -26,6 +26,7 @@
                 <th scope="col"></th>
                 </tr>
             </thead>
+            <tbody>
             <?php
                 $query = "SELECT * FROM exam JOIN course ON exam.courseID = course.courseID JOIN student ON exam.courseID = student.courseID WHERE student.studentID='$username'";
                 $resultQuery = mysqli_query($conn, $query);
@@ -35,7 +36,7 @@
                 while ($resultRow){
 
                     $examID=$resultRow['examID']; // pass examID
-
+                    $examTitle=$resultRow['examTitle'];
                     $query = "SELECT * FROM result JOIN student ON result.studentID = student.studentID WHERE result.studentID='$username' AND result.examID='$examID'";
                     $countQuery = mysqli_query($conn, $query);
                     $rowcount = mysqli_num_rows($countQuery);
@@ -49,7 +50,7 @@
                         echo "<td>".$resultRow['duration']."</td>";
                         echo "<td>".$resultRow['date']." / ".$resultRow['time']."</td>";
                         echo "<td>".$resultRow['teacherID']."</td>";
-                        echo "<form action='takeTest.php?examID=$examID' method='post'>";
+                        echo "<form action='takeTest.php?examID=$examID&examTitle=$examTitle' method='post'>";
                         echo "<td><input type='submit' class='btn btn-success' name='start' value='Start '/></td></form></tr>";
                         $resultRow = mysqli_fetch_assoc($resultQuery);
                         $i++;
@@ -72,3 +73,6 @@
             
             ?>
             </tbody>
+        </table>
+    </div>
+</div>
