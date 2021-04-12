@@ -86,7 +86,7 @@
             </thead>
             <tbody>
             <?php
-
+            
                 include "dbConnection.php";
 
                 // add teacher to database

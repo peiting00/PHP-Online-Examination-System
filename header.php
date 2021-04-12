@@ -36,24 +36,31 @@
                   echo "<a class='nav-link' href='adminHome.php?nav=examList'>Exam List</a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                    echo "<a class='nav-link' href='login.php'>Logout</a>";
+                    echo "<a class='nav-link' href='logout.php'>Logout</a>";
                 echo "</li>";
               } else if ($_SESSION["role"] == "teacher") {
                 echo "<li class='nav-item active'>";
-                  echo "<a class='nav-link' href='#'>Upload Test<span class='sr-only'>(current)</span></a>";
+                  echo "<a class='nav-link' href='teacherHome.php?nav=examList'>Exam List</a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                  echo "<a class='nav-link' href='login.php'>Logout</a>";
+                  echo "<a class='nav-link' href='teacherHome.php?nav=uploadTest'>Upload Test<span class='sr-only'>(current)</span></a>";
+                echo "</li>";
+                echo "<li class='nav-item'>";
+                  echo "<a class='nav-link' href='logout.php'>Logout</a>";
                 echo "</li>";
               } else if ($_SESSION["role"] == "student") {
                 echo "<li class='nav-item active'>";
-                  echo "<a class='nav-link' href='#'>Take Test<span class='sr-only'>(current)</span></a>";
+                  echo "<a class='nav-link' href='studentHome.php?nav=takeTest'>Take Test<span class='sr-only'>(current)</span></a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                  echo "<a class='nav-link' href='#'>View History<span class='sr-only'>(current)</span></a>";
+                  echo "<a class='nav-link' href='studentHome.php?nav=viewHistory'>View History<span class='sr-only'>(current)</span></a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                  echo "<a class='nav-link' href='login.php'>Logout</a>";
+                  echo "<a class='nav-link' href='logout.php'>Logout</a>";
+                echo "</li>";
+                echo "<li class='nav-item' class='nav justify-content-end'>";
+                  echo "<a class='nav-link active justify-content-end'>";
+                echo "   | Welcome, ".$_SESSION['username']." !</a>";
                 echo "</li>";
               }
             ?>

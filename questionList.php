@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    include "security.php";
     $_SESSION["role"] = "admin";
     include "header.php";
     include "dbConnection.php";

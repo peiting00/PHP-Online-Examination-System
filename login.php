@@ -19,7 +19,9 @@
 </script>
 
 <?php
-    include "html/login.html";
+    ob_start();
+    session_start();
+    include "html/login_face.php";
     include "dbConnection.php";
 
     if (isset($_POST["admin_login"]) || isset($_POST["teacher_login"]) || isset($_POST["student_login"])) {
@@ -45,11 +47,26 @@
             } else if (password_verify($password, $password_hash[0])) {
                 echo "<script>show_alert('$userID')</script>";
                 if (isset($_POST["admin_login"])) {
+                    if(isset($_POST["remember_me"])){  
+                        setcookie('usernamecookie', $userID, time()+86400); //86400 = 1 day
+                        setcookie('passwordcookie', $password, time()+86400);
+                    }
+                    $_SESSION["username"]= $userID;
                     header("refresh:3;url=adminHome.php?nav=studentList");
                 } else if (isset($_POST["teacher_login"])) {
-                    header("refresh:3;url=teacherHome.php?");
+                    if(isset($_POST["remember_me"])){  
+                        setcookie('usernamecookie', $userID, time()+86400); //86400 = 1 day
+                        setcookie('passwordcookie', $password, time()+86400);
+                    }
+                    $_SESSION["username"]= $userID;
+                    header("refresh:3;url=teacherHome.php?nav=examList");
                 } else {
-                    header("refresh:3;url=studentHome.php");
+                    if(isset($_POST["remember_me"])){  
+                        setcookie('usernamecookie', $userID, time()+86400); //86400 = 1 day
+                        setcookie('passwordcookie', $password, time()+86400);
+                    }
+                    $_SESSION["username"]= $userID;
+                    header("refresh:3;url=studentHome.php?nav=viewHistory");
                 }
             } else {
                 echo "<script>show_alert('fail_password')</script>";
@@ -58,4 +75,5 @@
     }
 
     mysqli_close($conn);
+    ob_end_flush();
 ?>

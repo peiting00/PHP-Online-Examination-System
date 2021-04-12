@@ -1,9 +1,10 @@
 <?php
-    session_start();
+    include "security.php";
     $_SESSION["role"] = "admin";
     include "header.php";
     include "dbConnection.php";
     include "dataTable.php";
+    $username = $_SESSION["username"];
 ?>
 
 <body>
