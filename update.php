@@ -51,8 +51,6 @@
                 header("location:takeTest.php?examID=$examID&examTitle=$examTitle&start=1&n=$n&qID=$qID&totalQ=$totalQ");
             }
         }
-        //update total mark
-        //$insertQuery="INSERT INTO mark(studentID,examID,totalMarks,"
 
         // LOOP QUESTION
         if($qID!=$lastQ){
@@ -66,10 +64,10 @@
 
     }
 
-
-
-
     }
+
+
+    
 
 
 
