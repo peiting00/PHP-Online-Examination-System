@@ -25,8 +25,9 @@
                 <?php if( $_GET['examID'] && $_GET['start']==0 ){?>
                 <tr>
                     <th colspan="3" ><br>
-                    <span style="color:red">Warning: You have only ONE attempt to answer the exam, timer will start as soon as the question loads.</span>
-                    <br><br><br>
+                    <span style="color:red">Warning:</span><br>
+                    <span style="color:red">You have only ONE attempt to answer the exam, timer will start as soon as the question loads.</span><br>
+                    <span style="color:red">Please be aware that the exam cannot be resumed if you leave the page.</span><br><br><br>
                     <?php
                         echo "<form action='takeTest.php?examID=".$_GET['examID']."&examTitle=".$_GET['examTitle']."&start=1&n=1' method='post'>";
                         echo "<input type='submit' class='btn btn-success' name='start' value='Start the exam'/>&nbsp;&nbsp;";
