@@ -33,23 +33,26 @@
                 $resultRow = mysqli_fetch_assoc($resultQuery);
                 //echo $resultQuery." ".$resultRow;
                 $i = 1;
-                do {
-                    $id = $resultRow['examID'];
-                    echo "<tr><td>$i</td>";
-                    echo "<td>".$resultRow['studentID']."</td>";
-                    echo "<td>".$resultRow['studentName']."</td>";
-                    echo "<td>".$resultRow['totalMarks']."</td>";
-                    //$query2 = "SELECT * FROM mark WHERE exam";
-                    //$rankQuery = mysqli_query($conn, $query);
-                    //$rankRow = mysqli_fetch_assoc($resultQuery);
-                    echo "<td>".$resultRow['ranking']."</td>";
-                    echo "<td>".$resultRow['examTitle']."</td>";
-                    echo "<td>".$resultRow['date']." / ".$resultRow['time']."</td>";
-                    echo "<form action='detailList_stu.php?id=$id' method='post'>";
-                    echo "<td><input type='submit' class='btn btn-primary' name='detail' value='Detail'/></td></form></tr>\n";
-                    $resultRow = mysqli_fetch_assoc($resultQuery);
-                    $i++;
-                } while ($resultRow);
+                if($resultRow > 1) {
+                    do {
+                        $id = $resultRow['examID'];
+                        echo "<tr><td>$i</td>";
+                        echo "<td>".$resultRow['studentID']."</td>";
+                        echo "<td>".$resultRow['studentName']."</td>";
+                        echo "<td>".$resultRow['totalMarks']."</td>";
+                        //$query2 = "SELECT * FROM mark WHERE exam";
+                        //$rankQuery = mysqli_query($conn, $query);
+                        //$rankRow = mysqli_fetch_assoc($resultQuery);
+                        echo "<td>".$resultRow['ranking']."</td>";
+                        echo "<td>".$resultRow['examTitle']."</td>";
+                        echo "<td>".$resultRow['date']." / ".$resultRow['time']."</td>";
+                        echo "<form action='detailList_stu.php?id=$id' method='post'>";
+                        echo "<td><input type='submit' class='btn btn-primary' name='detail' value='Detail'/></td></form></tr>\n";
+                        $resultRow = mysqli_fetch_assoc($resultQuery);
+                        $i++;
+                    } while ($resultRow);
+                }
+
             ?>
             </tbody>
         </table>
