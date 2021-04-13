@@ -34,6 +34,7 @@
             document.getElementById("title").innerHTML = id;
             // for all <input>
             $('#editID').val(id);
+            $('#teacherID').val(id);
             $('#name').val(name);
             $('#faculty').val(faculty);
             $('#email').val(email);
@@ -122,7 +123,8 @@
 
                 // update teacher database
                 } else if (isset($_POST["edit"])) {
-                    $id = $_POST["editID"];
+                    $editID = $_POST["editID"];
+                    $teacherID = $_POST["teacherID"];
                     $name = $_POST["name"];
                     $faculty = $_POST["faculty"];
                     $email = $_POST["email"];
@@ -130,8 +132,8 @@
                     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
                     $updateQuery = mysqli_query($conn,"UPDATE teacher
-                            SET teacherName='$name', facultyID='$faculty', email='$email', password_hash='$hashed_password'
-                            WHERE teacherID='$id'");
+                            SET teacherID='$teacherID', teacherName='$name', facultyID='$faculty', email='$email', password_hash='$hashed_password'
+                            WHERE teacherID='$editID'");
 
                     if($updateQuery) {
                         echo "<script>show_alert('update')</script>";
@@ -187,7 +189,7 @@
                 echo "</select></td>";
                 echo "<td><input type='text' class='form-control' name='email' required/></td>";
                 echo "<td><input type='text' class='form-control' name='password' required/></td>";
-                echo "<td><input style='width: 80px;' type='submit' class='btn btn-success' name='add' value='Add'/></td></tr></form>\n";
+                echo "<td><input style='width: 80px;' type='submit' class='btn btn-success' name='add' value='Add'/></td><td></td><td></td></tr></form>\n";
             ?>
         </table>
 
@@ -204,6 +206,10 @@
                 <div class="modal-body">
                     <form action="adminHome.php?nav=teacherList" method="post">
                         <input name="editID" id="editID" style="display: none;"/>
+                        <div class="input">
+                            <label class="modalLabel" for="name">Teacher ID</label>
+                            <input type="text" class="form-control" name="teacherID" id="teacherID" required>
+                        </div>
                         <div class="input">
                             <label class="modalLabel" for="name">Name</label>
                             <input type="text" class="form-control" name="name" id="name" required>
