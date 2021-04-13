@@ -66,7 +66,7 @@
                         setcookie('passwordcookie', $password, time()+86400);
                     }
                     $_SESSION["username"]= $userID;
-                    header("refresh:3;url=studentHome.php?nav=viewHistory");
+                    header("refresh:3;url=studentHome.php?nav=takeTest");
                 }
             } else {
                 echo "<script>show_alert('fail_password')</script>";

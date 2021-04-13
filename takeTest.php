@@ -40,36 +40,48 @@
 
         <!-- Test Start-->
         <?php
-            if( $_GET['examID'] && $_GET['start']==1 ){
+       
+            if($_GET['examID'] && $_GET['start']==1 ){
+                
                 $examID=$_GET['examID'];
                 $examTitle=$_GET['examTitle'];
                 $n=$_GET['n'];
-                $query = "SELECT * FROM question JOIN exam ON question.examID = exam.examID WHERE question.examID='".$_GET['examID']."'";
-                $resultQuery = mysqli_query($conn, $query);
-                
-                while ($resultRow=mysqli_fetch_assoc($resultQuery)){
-                        
+
+                if(!isset($_GET['qID'])){
+                    $query = "SELECT * FROM question JOIN exam ON question.examID = exam.examID WHERE question.examID=$examID ";
+                   
+                }else{
+                    if(isset($_GET['qID'])){
+                        $qid= $_GET['qID'];}
+                    $query = "SELECT * FROM question JOIN exam ON question.examID = exam.examID WHERE question.examID=$examID and question.questionID=$qid";
+                }
+                echo "<div style='margin:5%'>";
+                $resultQuery = mysqli_query($conn, $query) or die("Error" +mysqli_error($conn));
+                $resultRow=mysqli_fetch_array($resultQuery);
+                if ($resultRow){
                         $qID=$resultRow['questionID'];
                         $totalQ=$resultRow['totalQuestion'];
-                        echo $n;
+
+                        echo $n.".&nbsp;";
                         echo "&nbsp;".$resultRow['question']."<br>";
                 }
                 
+                $query= "SELECT * FROM question WHERE questionID =$qID";
                 $resultQuery = mysqli_query($conn, $query);
-                echo "<form action='update.php?examID=$examID&start=1&qID=$qID&n=$n&totalQ=$totalQ' method='post'>"; // update answer
+                echo "<form action='update.php?examID=$examID&examTitle=$examTitle&start=1&n=$n&qID=$qID&totalQ=$totalQ' method='POST'>"; // update answer
                 echo "<br>";
                 
-                while ($resultRow=mysqli_fetch_assoc($resultQuery)){
+                while ($resultRow=mysqli_fetch_array($resultQuery)){
                         echo "<input type='radio' name='ans' value='".$resultRow['option1']."'>&nbsp;".$resultRow['option1']."<br /><br />";
                         echo "<input type='radio' name='ans' value='".$resultRow['option2']."'>&nbsp;".$resultRow['option2']."<br /><br />";
                         echo "<input type='radio' name='ans' value='".$resultRow['option3']."'>&nbsp;".$resultRow['option3']."<br /><br />";
                         echo "<input type='radio' name='ans' value='".$resultRow['option4']."'>&nbsp;".$resultRow['option4']."<br /><br />";
                 }
-                        echo "<td><div><button type='submit' class='btn btn-success'><span class='glyphicon glyphicon-lock' aria-hidden='true'></span>Submit</button></div></td></form></tr>";
-                        
-                
+                echo'<br /><button type="submit" name="submitQ" onclick="checkEmpty()" class="btn btn-success"><span aria-hidden="true"></span>&nbsp;Submit</button></form>';
             }
-        ?>
-                
-
+            if(isset($_GET['ERROR'])){
+                echo "<span style='color:red ; bold'>WARNING : DO NOT SUBMIT EMPTY ANSWER !</span>";
+            }
             
+        ?>
+
