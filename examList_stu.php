@@ -5,6 +5,7 @@
     $username = $_SESSION['username'];
     $_SESSION["user"]=$username;
     
+    date_default_timezone_set('Asia/Kuala_Lumpur');
 ?>
 
 <br>
@@ -28,7 +29,7 @@
             </thead>
             <tbody>
             <?php
-                $query = "SELECT * FROM exam JOIN course ON exam.courseID = course.courseID JOIN student ON exam.courseID = student.courseID WHERE student.studentID='$username'";
+                $query = "SELECT * FROM exam JOIN course ON exam.courseID = course.courseID JOIN student ON exam.courseID = student.courseID WHERE student.studentID='$username' ORDER BY exam.date";
                 $resultQuery = mysqli_query($conn, $query);
                 $resultRow = mysqli_fetch_assoc($resultQuery);
                 $i = 1;
@@ -37,10 +38,17 @@
 
                     $examID=$resultRow['examID']; // pass examID
                     $examTitle=$resultRow['examTitle'];
+                    $examDate=$resultRow['date'];
+                    $examTime=$resultRow['time'];
+
+                   
+
+
                     $query = "SELECT * FROM result JOIN student ON result.studentID = student.studentID WHERE result.studentID='$username' AND result.examID='$examID'";
                     $countQuery = mysqli_query($conn, $query);
                     $rowcount = mysqli_num_rows($countQuery);
                     
+
                     if($rowcount == 0){
                         
                         echo "<tr><td>$i</td>";
@@ -51,11 +59,17 @@
                         echo "<td>".$resultRow['date']." / ".$resultRow['time']."</td>";
                         echo "<td>".$resultRow['teacherID']."</td>";
                         echo "<form action='takeTest.php?examID=$examID&examTitle=$examTitle&start=0' method='post'>";
+
+                        if($examDate < date('Y-m-d')){
+                            echo "<td><input type='button' class='btn btn-danger' value='Expired '/></td></form></tr>";
+                        }else{
                         echo "<td><input type='submit' class='btn btn-success' name='start' value='Start '/></td></form></tr>";
+                        }
                         $resultRow = mysqli_fetch_assoc($resultQuery);
                         $i++;
                     } 
                     else{
+
                         echo "<tr style='color:MediumSeaGreen'><td>$i</td>";
                         echo "<td>".$resultRow['examID']."</td>";
                         echo "<td>".$resultRow['examTitle']."</td>";
@@ -65,9 +79,11 @@
                         echo "<td>".$resultRow['teacherID']."</td>";
                         echo "<form action='examList_stu.php' method='post'>";
                         echo "<td><input type='button' class='btn btn-danger' value='Taken'/></td></form></tr>";
+                        
                         $resultRow = mysqli_fetch_assoc($resultQuery);
                         $i++;
-                    } 
+                    }
+                    
 
                 }
             
