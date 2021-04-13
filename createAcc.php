@@ -17,7 +17,7 @@
         }else {
             alertDiv.classList.add("alert-success");
             $(alertDiv).append("<button type='button' class='close' data-dismiss='alert'>&times;</button>"+
-                               "</button>You have registered a new account with us! P");
+                               "</button>You have registered a new account with us!");
         }
     }
 </script>
@@ -65,7 +65,7 @@ include "html/createAcc_face.php";
         // INSERT INTO Database   
         if($status==1){
                 //store new data into database
-                $insertQuery="INSERT INTO student(studentID,studentName,email,courseID,password_hash) VALUES ('$studentID','$studentName','$email','$courseID','$hashed_password')";
+                $insertQuery="INSERT INTO student(studentID,studentName,email,courseID,password_hash) VALUES ('$studentID','$studentName','$email','$course','$hashed_password')";
                 $register=mysqli_query($conn,$insertQuery);
                 // If Insert Successfully
                 if($register){

@@ -19,6 +19,14 @@ $query = "INSERT INTO exam (examTitle, courseID, date, time, duration, totalQues
 VALUES ('$title', '$course', '$date', '$time', '$duration', '$question', '$mark', '$wrongWsign', '$userID')";
         $query_run = mysqli_query($conn, $query);
 
+        if($query_run){
+?>
+                <html><header><h3>Record added successfully! You will be return to homepage by 3 second!</h3></header></html>
+
+<?php
+                header("refresh:3;url=teacherHome.php?nav=examList");
+        }
+
 }
 
 if(isset($_POST['addquestion'])){
@@ -52,13 +60,37 @@ if(isset($_POST['addquestion'])){
         }
 
         if($run){
-                echo "can work";
+                ?>
+                <html><header><h3>Record added successfully! You will be return to homepage by 3 second!</h3></header></html>
+
+<?php
+                header("refresh:3;url=teacherHome.php?nav=examList");
         }
         else{
                 echo "cannot work";
         }
 
 
+}
+
+if(isset($_POST['delete'])){
+        $examID = $_POST['exam_id'];
+
+        $q = "DELETE exam FROM exam WHERE examID = '$examID'"; 
+        $c1 = mysqli_query($conn, $q);
+        $q2 = "DELETE question FROM question WHERE examID = '$examID'";
+        $c2 = mysqli_query($conn, $q2);
+
+        if($c1 && $c2){
+                echo "Record DELETED Successfully";
+                header("Location: teacherHome.php?nav=examList");
+        }
+        else {
+                ?>
+                <html><header><h3>Error Occur please refresh the page!</h3></header></html>
+
+<?php
+        }
 }
 
 ?>
