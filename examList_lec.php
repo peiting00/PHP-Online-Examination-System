@@ -42,7 +42,7 @@
                     $checkqus = mysqli_query($conn, "SELECT examID FROM question WHERE examID='$examRow[0]'");
                     
                     if(mysqli_fetch_row($checkqus)>0){
-                        echo "<form action='questionList.php?id=$examRow[0]' method='post'>";
+                        echo "<form action='questionList_tec.php?id=$examRow[0]' method='post'>";
                         echo "<td><input type='submit' class='btn btn-warning' name='question' value='Question'/></form></td>\n";
                     }
                     else{
@@ -51,7 +51,7 @@
                         echo "<input type='hidden' class='btn btn-danger' name='exam_id' value='$examRow[0]'/>";
                         echo "<input type='hidden' class='btn btn-danger' name='total_question' value='$examRow[6]'/></form>";
                     }
-                    echo "<form action='resultList.php?id=$examRow[0]' method='post'>";
+                    echo "<form action='resultList_tec.php?id=$examRow[0]' method='post'>";
                     echo "<td><input type='submit' class='btn btn-secondary' name='result' value='Result'/></td></form>\n";
 
                     echo "<form action='code.php' method='post'>";

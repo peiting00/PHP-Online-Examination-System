@@ -153,6 +153,17 @@
                         $error = mysqli_error($conn);
                         echo "<script>show_alert(\"$error\")</script>";
                     }
+                } else if (isset($_POST["enroll"])){
+                    $name = $_POST["name"];
+                    $course = $_POST["course"];
+                    $enrollQuery = mysqli_query($conn, "INSERT INTO teacher_course (teacherID, courseID) 
+                    VALUES ('$name', '$course') ");
+                    if($enrollQuery) {
+                        echo "<script>show_alert('enroll')</script>"; 
+                    } else {
+                        $error = mysqli_error($conn);
+                        echo "<script>show_alert(\"$error\")</script>";
+                    }
                 }
 
                 // load teacher list
@@ -286,8 +297,9 @@
                             <input type="text" class="form-control" name="name" id="enrollID" readonly>
                         </div>
                         <div class="input">
-                            <label class="modalLabel" for="faculty">Faculty</label>
-                            <select class='form-control' name="faculty" id='faculty' required >
+                            <label class="modalLabel" for="course">Course</label>
+                            <select class='form-control' name="course" id='course' required >
+                            <option value = "">Select course to enroll</option>
                             <?php
                                 $courseQuery = mysqli_query($conn, "SELECT * FROM course");
                                 if (mysqli_num_rows($courseQuery) > 0) {
