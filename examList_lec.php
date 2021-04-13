@@ -51,7 +51,7 @@
                         echo "<input type='hidden' class='btn btn-danger' name='exam_id' value='$examRow[0]'/>";
                         echo "<input type='hidden' class='btn btn-danger' name='total_question' value='$examRow[6]'/></form>";
                     }
-                    echo "<form action='resultList.php?id=$examRow[0]' method='post'>";
+                    echo "<form action='resultList_tec.php?id=$examRow[0]' method='post'>";
                     echo "<td><input type='submit' class='btn btn-secondary' name='result' value='Result'/></td></form>\n";
 
                     echo "<form action='code.php' method='post'>";
