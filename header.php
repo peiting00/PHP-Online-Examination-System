@@ -43,7 +43,7 @@
                   echo "<a class='nav-link' href='teacherHome.php?nav=examList'>Exam List</a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                  echo "<a class='nav-link' href='teacherHome.php?nav=uploadTest'>Upload Test<span class='sr-only'>(current)</span></a>";
+                  echo "<a class='nav-link' href='teacherHome.php?nav=uploadTest'>Add Exam Detail<span class='sr-only'>(current)</span></a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
                   echo "<a class='nav-link' href='logout.php'>Logout</a>";
