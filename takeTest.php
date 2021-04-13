@@ -27,9 +27,8 @@
                     <th colspan="3" ><br>
                     <span style="color:red">Warning: You have only ONE attempt to answer the exam, timer will start as soon as the question loads.</span>
                     <br><br><br>
-
                     <?php
-                        echo "<form action='takeTest.php?examID=".$_GET['examID']."&examTitle=".$_GET['examTitle']."&start=1&n=1&lastQ=0' method='post'>";
+                        echo "<form action='takeTest.php?examID=".$_GET['examID']."&examTitle=".$_GET['examTitle']."&start=1&n=1' method='post'>";
                         echo "<input type='submit' class='btn btn-success' name='start' value='Start the exam'/>&nbsp;&nbsp;";
                         echo "<a href='studentHome.php?nav=takeTest' style='color:grey'>CANCEL</a></form>";}
                     ?>
@@ -40,9 +39,9 @@
 
         <!-- Test Start-->
         <?php
-       
+            //$_SESSION['time'] = time()+(60*60);
             if($_GET['examID'] && $_GET['start']==1 ){
-                $lastQ=$_GET['lastQ'];
+                //$lastQ=$_GET['lastQ'];
                 $examID=$_GET['examID'];
                 $examTitle=$_GET['examTitle'];
                 $n=$_GET['n'];
@@ -51,8 +50,9 @@
                     $query = "SELECT * FROM question JOIN exam ON question.examID = exam.examID WHERE question.examID=$examID ";
                    
                 }else{
-                    if(isset($_GET['qID'])){
-                        $qid= $_GET['qID'];}
+                    
+                        $qid= $_GET['qID'];
+                    
                     $query = "SELECT * FROM question JOIN exam ON question.examID = exam.examID WHERE question.examID=$examID and question.questionID=$qid";
                 }
                 echo "<div style='margin:5%'>";
@@ -68,20 +68,23 @@
                 
                 $query= "SELECT * FROM question WHERE questionID =$qID";
                 $resultQuery = mysqli_query($conn, $query);
-                echo "<form action='update.php?examID=$examID&examTitle=$examTitle&start=1&n=$n&qID=$qID&totalQ=$totalQ&lastQ=$lastQ' method='POST'>"; // update answer
+                echo "<form action='update.php?examID=$examID&examTitle=$examTitle&start=1&n=$n&qID=$qID&totalQ=$totalQ' method='POST'>"; // update answer
                 echo "<br>";
-                
+                //echo $totalQ." ". $qID." ".$n;
+                if($n==1)
+                {
+                    $_SESSION['sum']=0;
+                }
                 while ($resultRow=mysqli_fetch_array($resultQuery)){
                         echo "<input type='radio' name='ans' value='".$resultRow['option1']."'>&nbsp;".$resultRow['option1']."<br /><br />";
                         echo "<input type='radio' name='ans' value='".$resultRow['option2']."'>&nbsp;".$resultRow['option2']."<br /><br />";
                         echo "<input type='radio' name='ans' value='".$resultRow['option3']."'>&nbsp;".$resultRow['option3']."<br /><br />";
                         echo "<input type='radio' name='ans' value='".$resultRow['option4']."'>&nbsp;".$resultRow['option4']."<br /><br />";
                 }
-                echo'<br /><button type="submit" name="submitQ" onclick="checkEmpty()" class="btn btn-success"><span aria-hidden="true"></span>&nbsp;Submit</button></form>';
+                echo'<br /><button type="submit" name="submitQ" class="btn btn-success"><span aria-hidden="true"></span>&nbsp;Submit</button></form>';
             }
             if(isset($_GET['ERROR'])){
                 echo "<span style='color:red ; bold'>WARNING : DO NOT SUBMIT EMPTY ANSWER !</span>";
             }
             
         ?>
-

@@ -34,7 +34,7 @@
         });
 
         $('#detail_table').DataTable({
-            autoWidth: false,
+            "autoWidth": false,
             scrollX: true
         });
 
