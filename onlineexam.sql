@@ -96,8 +96,8 @@ INSERT INTO `exam` (`examID`, `examTitle`, `courseID`, `date`, `time`, `duration
 (1, 'PHP Quiz 1', 'BCSI', '2021-02-26', '14:10:00', 20, 10, 1.5, -2, 'teacher05'),
 (2, 'Life Process Quiz', 'FIS', '2021-02-25', '13:20:00', 20, 10, 1, -1.5, 'teacher06'),
 (3, 'Web Programming With PHP ', 'BITI', '2021-03-05', '10:00:00', 15, 2, 2, -2, 'teacher05'),
-(4, 'Online Quiz 2 PHP ', 'BCSI', '2021-05-05', '10:00:00', 20, 10, 1.5, -2, 'teacher05');
-
+(4, 'Online Quiz 2 PHP ', 'BCSI', '2021-05-05', '10:00:00', 20, 10, 1.5, -2, 'teacher05'),
+(5,'Online activity 1','BCSI','2021-01-20','14:00:00',5,10,1,-1.5,'teacher05');
 -- --------------------------------------------------------
 
 --

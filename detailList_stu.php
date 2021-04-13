@@ -1,8 +1,10 @@
 <?php
+    session_start();
     include "dataTable.php";
     include "dbConnection.php";
-    session_start();
+    include "header.php";
     $ex_id = $_GET["id"];
+    $_SESSION['role'] = "student";
     $username = $_SESSION['user'];
 ?>
 <script>
