@@ -75,22 +75,33 @@ if(isset($_POST['addquestion'])){
 
 if(isset($_POST['delete'])){
         $examID = $_POST['exam_id'];
+        
 
-        $q = "DELETE exam FROM exam WHERE examID = '$examID'"; 
-        $c1 = mysqli_query($conn, $q);
-        $q2 = "DELETE question FROM question WHERE examID = '$examID'";
-        $c2 = mysqli_query($conn, $q2);
+        // $q = "DELETE exam FROM exam WHERE examID = '$examID'"; 
+        // $c1 = mysqli_query($conn, $q);
+        // $q2 = "DELETE question FROM question WHERE examID = '$examID'";
+        // $c2 = mysqli_query($conn, $q2);
 
-        if($c1 && $c2){
-                echo "Record DELETED Successfully";
-                header("Location: teacherHome.php?nav=examList");
-        }
-        else {
-                ?>
-                <html><header><h3>Error Occur please refresh the page!</h3></header></html>
+//         $tables = array("exam","question");
+//         foreach($tables as $table) {
+//         $query = "DELETE FROM $table WHERE examID='$examID'";
+//         mysqli_query($conn,$query);
+// }
 
+$q = "DELETE FROM exam WHERE examID = '$examID';"; 
+$q .= "DELETE FROM question WHERE examID = '$examID'";
+
+if ($conn->multi_query($q) === TRUE) {
+?>
+        <html><header><h3>Record deleted successfully! You will be return to homepage by 3 second!</h3></header></html>
 <?php
-        }
+        header("Location: teacherHome.php?nav=examList");
+      } else {
+        echo "Error: " . $q . "<br>" . $conn->error;
+      }
+      
+      $conn->close();
+
 }
 
 ?>

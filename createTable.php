@@ -61,8 +61,7 @@ $questionSql = "CREATE TABLE IF NOT EXISTS question (
     option2 VARCHAR(50) NOT NULL,
     option3 VARCHAR(50) NOT NULL,
     option4 VARCHAR(50) NOT NULL,
-    answer VARCHAR(50) NOT NULL,
-    FOREIGN KEY (examID) REFERENCES exam(examID))";
+    answer VARCHAR(50) NOT NULL";
 
 $resultSql = "CREATE TABLE IF NOT EXISTS result (
     resultID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
