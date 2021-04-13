@@ -41,6 +41,9 @@
         <?php
             //$_SESSION['time'] = time()+(60*60);
             if($_GET['examID'] && $_GET['start']==1 ){
+                if(isset($_GET['ERROR'])){
+                    echo "<span style='color:red ; bold'>WARNING : DO NOT SUBMIT EMPTY ANSWER !</span>";
+                }
                 //$lastQ=$_GET['lastQ'];
                 $examID=$_GET['examID'];
                 $examTitle=$_GET['examTitle'];
@@ -83,8 +86,4 @@
                 }
                 echo'<br /><button type="submit" name="submitQ" class="btn btn-success"><span aria-hidden="true"></span>&nbsp;Submit</button></form>';
             }
-            if(isset($_GET['ERROR'])){
-                echo "<span style='color:red ; bold'>WARNING : DO NOT SUBMIT EMPTY ANSWER !</span>";
-            }
-            
         ?>
