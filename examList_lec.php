@@ -42,7 +42,7 @@
                     $checkqus = mysqli_query($conn, "SELECT examID FROM question WHERE examID='$examRow[0]'");
                     
                     if(mysqli_fetch_row($checkqus)>0){
-                        echo "<form action='questionList.php?id=$examRow[0]' method='post'>";
+                        echo "<form action='questionList_tec.php?id=$examRow[0]' method='post'>";
                         echo "<td><input type='submit' class='btn btn-warning' name='question' value='Question'/></form></td>\n";
                     }
                     else{
