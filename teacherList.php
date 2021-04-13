@@ -48,6 +48,15 @@
             // for hidden <input>
             $('#deleteID').val(id);
         });
+
+        $(".enrollBtn").click(function() {
+            var btnID = this.id;
+            var id = document.getElementsByName(btnID)[0].innerHTML;
+            // for <p>
+            document.getElementById("teacherID").innerHTML = id;
+            // for hidden <input>
+            $('#enrollID').val(id);
+        });
     });
 </script>
 <style>
@@ -157,7 +166,7 @@
                     echo "<td name='$teacherRow[0]'>{$teacherRow[4]}</td>";
                     echo "<td><button style='width: 80px;' class='editBtn btn btn-primary' id='$teacherRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button></td>";
                     echo "<td><button style='width: 80px;' class='deleteBtn btn btn-danger' id='$teacherRow[0]' data-toggle='modal' data-target='#deleteModal'\">Delete</a></button></td>";
-                    echo "<td><button style='width: 80px;' class='enrollbtn btn-success' id='$teacherRow[0]' data-toggle='modal' data-target='#enrollModal'\">Enroll</a></button></td>";
+                    echo "<td><button style='width: 80px;' class='enrollBtn btn btn-success' id='$teacherRow[0]' data-toggle='modal' data-target='#enrollModal'\">Enroll</a></button></td>";
                     $teacherRow = mysqli_fetch_row($teacherQuery);
                     $i++;
                 } while ($teacherRow);
@@ -265,10 +274,10 @@
                 </div>
                 <div class="modal-body">
                     <form action="adminHome.php?nav=teacherList" method="post">
-                        <input name="enrollID" id="enrollID" style="display: none;"/>
+                        <input name="enrollID" style="display: none;"/>
                         <div class="input">
                             <label class="modalLabel" for="name">Name</label>
-                            <input type="text" class="form-control" name="name" id="name" readonly>
+                            <input type="text" class="form-control" name="name" id="enrollID" readonly>
                         </div>
                         <div class="input">
                             <label class="modalLabel" for="faculty">Faculty</label>
