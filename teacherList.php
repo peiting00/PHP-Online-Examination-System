@@ -81,7 +81,9 @@
                 <th scope="col">Faculty</th>
                 <th scope="col">Email</th>
                 <th scope="col">Password</th>
-                <th scope="col">Action</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Enroll</th>
                 </tr>
             </thead>
             <tbody>
@@ -153,8 +155,9 @@
                     echo "<td name='$teacherRow[0]'>{$teacherRow[2]}</td>";
                     echo "<td name='$teacherRow[0]'>{$teacherRow[3]}</td>";
                     echo "<td name='$teacherRow[0]'>{$teacherRow[4]}</td>";
-                    echo "<td><button style='width: 80px;' class='editBtn btn btn-primary' id='$teacherRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button>";
-                    echo "<button style='width: 80px;' class='deleteBtn btn btn-danger' id='$teacherRow[0]' data-toggle='modal' data-target='#deleteModal'\">Delete</a></button></td>";
+                    echo "<td><button style='width: 80px;' class='editBtn btn btn-primary' id='$teacherRow[0]' data-toggle='modal' data-target='#editModal'\">Edit</a></button></td>";
+                    echo "<td><button style='width: 80px;' class='deleteBtn btn btn-danger' id='$teacherRow[0]' data-toggle='modal' data-target='#deleteModal'\">Delete</a></button></td>";
+                    echo "<td><button style='width: 80px;' class='enrollbtn btn-success' id='$teacherRow[0]' data-toggle='modal' data-target='#enrollModal'\">Enroll</a></button></td>";
                     $teacherRow = mysqli_fetch_row($teacherQuery);
                     $i++;
                 } while ($teacherRow);
@@ -250,5 +253,45 @@
 
             </div>
         </div>
+        <!-- Enroll Model -->
+        <div id="enrollModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="title">Enroll</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form action="adminHome.php?nav=teacherList" method="post">
+                        <input name="enrollID" id="enrollID" style="display: none;"/>
+                        <div class="input">
+                            <label class="modalLabel" for="name">Name</label>
+                            <input type="text" class="form-control" name="name" id="name" readonly>
+                        </div>
+                        <div class="input">
+                            <label class="modalLabel" for="faculty">Faculty</label>
+                            <select class='form-control' name="faculty" id='faculty' required >
+                            <?php
+                                $courseQuery = mysqli_query($conn, "SELECT * FROM course");
+                                if (mysqli_num_rows($courseQuery) > 0) {
+                                    while ($courseRow = mysqli_fetch_assoc($courseQuery)) {
+                                        echo "<option  id='courseID' value='{$courseRow["courseID"]}'>{$courseRow["courseName"]}</option>\n";
+                                    }
+                                }
+                            ?>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" name="enroll" class="btn btn-success" value="Enroll"/>
+                            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel"/>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

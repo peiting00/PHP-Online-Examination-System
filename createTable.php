@@ -43,6 +43,14 @@ $examSql = "CREATE TABLE IF NOT EXISTS exam (
     totalQuestion INT(5) NOT NULL,
     rightAnsMark FLOAT(5) NOT NULL,
     wrongAnsMark FLOAT(5) NOT NULL,
+    teacherID VARCHAR(30) NOT NULL,
+    FOREIGN KEY (courseID) REFERENCES course(courseID))";
+
+$teacher_courseSql = "CREATE TABLE IF NOT EXISTS teacher_course (
+    tc_course int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    teacherID VARCHAR(30) NOT NULL,
+    courseID VARCHAR(30) NOT NULL,
+    FOREIGN KEY (teacherID) REFERENCES teacher(teacherID))
     FOREIGN KEY (courseID) REFERENCES course(courseID))";
 
 $questionSql = "CREATE TABLE IF NOT EXISTS question (
