@@ -17,6 +17,7 @@
                 <th scope="col">Wrong Answer Mark</th>
                 <th scope="col">Question</th>
                 <th scope="col">Result</th>
+                <th scope="col">DELETE</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,7 +52,11 @@
                         echo "<input type='hidden' class='btn btn-danger' name='total_question' value='$examRow[6]'/></form>";
                     }
                     echo "<form action='resultList.php?id=$examRow[0]' method='post'>";
-                    echo "<td><input type='submit' class='btn btn-secondary' name='result' value='Result'/></td></form></tr>\n";
+                    echo "<td><input type='submit' class='btn btn-secondary' name='result' value='Result'/></td></form>\n";
+
+                    echo "<form action='code.php' method='post'>";
+                    echo "<input type='hidden' class='btn btn-danger' name='exam_id' value='$examRow[0]'/>";
+                    echo "<td><input type='submit' class='btn btn-danger' name='delete' value='DELETE'/></td></form></tr>\n";
                     $examRow = mysqli_fetch_row($examQuery);
                     $i++;
                 } while ($examRow);

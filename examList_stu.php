@@ -10,7 +10,7 @@
 <br>
 <div class="card">
     <div class="card-header" style="font-size: 20px; font-weight: 500;">
-        Online Examination Available
+        Available Online Examination 
     </div>
     <div class="card-body">
         <table class="table table-striped table-bordered" style="width: 100%;" id="result_table" cellspacing="0" width="100%">
@@ -23,7 +23,7 @@
                 <th scope="col">Duration</th>
                 <th scope="col">Date / Time</th>
                 <th scope="col">Lecturer</th>
-                <th scope="col"></th>
+                <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,7 +50,7 @@
                         echo "<td>".$resultRow['duration']."</td>";
                         echo "<td>".$resultRow['date']." / ".$resultRow['time']."</td>";
                         echo "<td>".$resultRow['teacherID']."</td>";
-                        echo "<form action='takeTest.php?examID=$examID&examTitle=$examTitle' method='post'>";
+                        echo "<form action='takeTest.php?examID=$examID&examTitle=$examTitle&start=0' method='post'>";
                         echo "<td><input type='submit' class='btn btn-success' name='start' value='Start '/></td></form></tr>";
                         $resultRow = mysqli_fetch_assoc($resultQuery);
                         $i++;

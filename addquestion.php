@@ -41,7 +41,7 @@ for($i=1; $i<=$q; $i++){
             			<div class="row">
               				<label class="col-md-4 text-right">Question Title <span class="text-danger">*</span></label>
 	              			<div class="col-md-8">
-	                			<input type="text" name="question_title[]" id="question_title[]" autocomplete="off" class="form-control" />
+	                			<input type="text" name="question_title[]" id="question_title[]" autocomplete="off" class="form-control" required />
 	                		</div>
             			</div>
           			</div>
@@ -49,7 +49,7 @@ for($i=1; $i<=$q; $i++){
             			<div class="row">
               				<label class="col-md-4 text-right">Option 1 <span class="text-danger">*</span></label>
 	              			<div class="col-md-8">
-	                			<input type="text" name="option_first[]" id="option_first[]" autocomplete="off" class="form-control" />
+	                			<input type="text" name="option_first[]" id="option_first[]" autocomplete="off" class="form-control" required />
 	                		</div>
             			</div>
           			</div>
@@ -57,7 +57,7 @@ for($i=1; $i<=$q; $i++){
             			<div class="row">
               				<label class="col-md-4 text-right">Option 2 <span class="text-danger">*</span></label>
 	              			<div class="col-md-8">
-	                			<input type="text" name="option_second[]" id="option_second[]" autocomplete="off" class="form-control" />
+	                			<input type="text" name="option_second[]" id="option_second[]" autocomplete="off" class="form-control" required/>
 	                		</div>
             			</div>
           			</div>
@@ -65,7 +65,7 @@ for($i=1; $i<=$q; $i++){
             			<div class="row">
               				<label class="col-md-4 text-right">Option 3 <span class="text-danger">*</span></label>
 	              			<div class="col-md-8">
-	                			<input type="text" name="option_third[]" id="option_third[]" autocomplete="off" class="form-control" />
+	                			<input type="text" name="option_third[]" id="option_third[]" autocomplete="off" class="form-control" required />
 	                		</div>
             			</div>
           			</div>
@@ -73,7 +73,7 @@ for($i=1; $i<=$q; $i++){
             			<div class="row">
               				<label class="col-md-4 text-right">Option 4 <span class="text-danger">*</span></label>
 	              			<div class="col-md-8">
-	                			<input type="text" name="option_fourth[]" id="option_fourth[]" autocomplete="off" class="form-control" />
+	                			<input type="text" name="option_fourth[]" id="option_fourth[]" autocomplete="off" class="form-control" required/>
 	                		</div>
             			</div>
           			</div>
@@ -81,12 +81,12 @@ for($i=1; $i<=$q; $i++){
             			<div class="row">
               				<label class="col-md-4 text-right">Answer <span class="text-danger">*</span></label>
 	              			<div class="col-md-8">
-	                			<select name="answer_option[]" id="answer_option[]" class="form-control">
-	                				<option value="">Select answer for question '.$i.'</option>
-	                				<option value="1">1 Option</option>
-	                				<option value="2">2 Option</option>
-	                				<option value="3">3 Option</option>
-	                				<option value="4">4 Option</option>
+	                			<select name="answer_option[]" id="answer_option[]" class="form-control" required>
+									<option value="">Select the answer</option>
+	                				<option value="1">Option No 1</option>
+	                				<option value="2">Option No 2</option>
+	                				<option value="3">Option No 3</option>
+	                				<option value="4">Option No 4</option>
 	                			</select>
 	                		</div>
             			</div>
