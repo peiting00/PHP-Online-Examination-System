@@ -21,7 +21,7 @@
 <?php
     ob_start();
     session_start();
-    include "html/login_face.php";
+    include "login_face.php";
     include "dbConnection.php";
 
     if (isset($_POST["admin_login"]) || isset($_POST["teacher_login"]) || isset($_POST["student_login"])) {

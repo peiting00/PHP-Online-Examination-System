@@ -1,5 +1,0 @@
-Before you start to code please add the onlineexam.sql to phpmyadmin, all passwords are the same as ID.
-Run createTable.php if no error it will bring you to login page.
-
-to do the session check please include the security.php file 
-

@@ -24,7 +24,7 @@
 
 <?php
 include "dbConnection.php";
-include "html/createAcc_face.php";
+include "createAcc_face.php";
     if (isset($_POST["register"])) {
         $status=0;
         // GET USER INPUT
