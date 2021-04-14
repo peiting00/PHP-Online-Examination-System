@@ -29,7 +29,7 @@
             </thead>
             <tbody>
             <?php
-                $query = "SELECT * FROM exam JOIN course ON exam.courseID = course.courseID JOIN student ON exam.courseID = student.courseID WHERE student.studentID='$username' ORDER BY exam.date";
+                $query = "SELECT * FROM exam JOIN course ON exam.courseID = course.courseID JOIN student ON exam.courseID = student.courseID WHERE student.studentID='$username' ORDER BY exam.date DESC";
                 $resultQuery = mysqli_query($conn, $query);
                 $resultRow = mysqli_fetch_assoc($resultQuery);
                 $i = 1;
@@ -40,9 +40,6 @@
                     $examTitle=$resultRow['examTitle'];
                     $examDate=$resultRow['date'];
                     $examTime=$resultRow['time'];
-
-                   
-
 
                     $query = "SELECT * FROM result JOIN student ON result.studentID = student.studentID WHERE result.studentID='$username' AND result.examID='$examID'";
                     $countQuery = mysqli_query($conn, $query);
@@ -55,14 +52,13 @@
                     if($rowcount == 0){ // no record in result table
                             echo "<tr><td>$i</td>";
                             echo "<td>".$resultRow['examID']."</td>";
-                            echo "<td>".$resultRow['examTitle']."&nbsp;<span title='This quiz is already solve by you' class='glyphicon glyphicon-ok' aria-hidden='true'></span></td>";
+                            echo "<td>".$resultRow['examTitle']."</td>";
                             echo "<td>".$resultRow['totalQuestion']."</td>";
                             echo "<td>".$resultRow['duration']."</td>";
                             echo "<td>".$resultRow['date']." / ".$resultRow['time']."</td>";
                             echo "<td>".$resultRow['teacherID']."</td>";
                             echo "<form action='takeTest.php?examID=$examID&examTitle=$examTitle&start=0' method='post'>";
-
-                            
+  
                         if($rowcount2==0){ // no record in mark table
                             
                             if($examDate < date('Y-m-d')){
@@ -74,13 +70,10 @@
                         }else{
                             echo "<td><input type='button' class='btn btn-danger' value='Exam Session Expired'/></td></form></tr>";
                         }
-                            
                             $resultRow = mysqli_fetch_assoc($resultQuery);
                             $i++;
-                        
                     } 
                     else{
-
                         echo "<tr style='color:MediumSeaGreen'><td>$i</td>";
                         echo "<td>".$resultRow['examID']."</td>";
                         echo "<td>".$resultRow['examTitle']."</td>";
@@ -93,7 +86,6 @@
                         $resultRow = mysqli_fetch_assoc($resultQuery);
                         $i++;
                     }
-                    
 
                 }
 

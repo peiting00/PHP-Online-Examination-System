@@ -18,7 +18,7 @@
         if($ans=="" OR $_GET['ans']!=0){
             header("location:takeTest.php?examID=".$_GET['examID']."&examTitle=".$_GET['examTitle']."&start=1&n=$n&qID=$qID&ERROR=1");
         } else {
-            // LOOP QUESTION
+            
             //GET Answer and Mark rubric
             $query = "SELECT * FROM question JOIN exam ON question.examID = exam.examID WHERE question.examID=$examID AND question.questionID=$qID";
             $answer = mysqli_query($conn, $query);
@@ -50,7 +50,7 @@
         
             if($n>=$totalQ){
                 $sum = $_SESSION['sum'];
-                header("location:takeTest.php?examID=$examID&examTitle=$examTitle&start=2"); //result 
+                header("location:takeTest.php?examID=$examID&examTitle=$examTitle&start=2"); //result slip
                 $insertQuery="INSERT INTO mark(studentID,examID,totalMarks,ranking) VALUES ('$username','$examID','$sum',1)";
                 $insert=mysqli_query($conn,$insertQuery);
                 if($insert)
@@ -101,7 +101,7 @@
                     }
                 }
             }
-            else{
+            else{// LOOP QUESTION
                 $qID++;
                 $n++;
                 header("location:takeTest.php?examID=$examID&examTitle=$examTitle&start=1&n=$n&qID=$qID&totalQ=$totalQ");

@@ -30,7 +30,7 @@
                     <span style="color:red">Please be aware that the exam cannot be resumed if you leave the page.</span><br><br><br>
                     <?php
                         echo "<form action='takeTest.php?examID=".$_GET['examID']."&examTitle=".$_GET['examTitle']."&start=1&n=1' method='post'>";
-                        echo "<input type='submit' class='btn btn-success' name='start' value='Start the exam'/>&nbsp;&nbsp;";
+                        echo "<input type='submit' class='btn btn-success' name='startNow' value='Start the exam'/>&nbsp;&nbsp;";
                         echo "<a href='studentHome.php?nav=takeTest' style='color:grey'>CANCEL</a></form>";}
                     ?>
                     </th>
@@ -42,7 +42,7 @@
         <?php
             
             //start the exam session
-            if(isset($_POST['start'])){
+            if(isset($_POST['startNow'])){
 
                 $_SESSION['examID']=$_GET['examID'];
                 $query = "SELECT * FROM question JOIN exam ON question.examID = exam.examID WHERE question.examID=".$_GET['examID']."";
@@ -80,6 +80,11 @@
                     $query = "SELECT * FROM question JOIN exam ON question.examID = exam.examID WHERE question.examID=$examID and question.questionID=$qid";
                 }
 
+                // show exam session
+                echo "<strong>START TIME : ".$_SESSION['examSessionSTART'];
+                echo "  |   ";
+                echo "DUE TIME : ".$_SESSION['examSessionEND']."</strong><br/><br/>";
+
                 $resultQuery = mysqli_query($conn, $query) or die("Error" +mysqli_error($conn));
                 $resultRow=mysqli_fetch_array($resultQuery);
                 if ($resultRow){
@@ -90,10 +95,6 @@
                         echo "&nbsp;".$resultRow['question']."&nbsp;&nbsp;";
                 }
                 
-                // show exam session
-                echo "<strong>START TIME : ".$_SESSION['examSessionSTART'];
-                echo "  |   ";
-                echo "DUE TIME : ".$_SESSION['examSessionEND']."</strong>";
                 
                 $query= "SELECT * FROM question WHERE questionID =$qID";
                 $resultQuery = mysqli_query($conn, $query);
