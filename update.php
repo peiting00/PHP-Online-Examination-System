@@ -15,7 +15,7 @@
         $username=$_SESSION['username'];
 
         //EMPTY ANSWER RETURN TO QUESTION
-        if($ans==""){
+        if($ans=="" OR $_GET['ans']!=0){
             header("location:takeTest.php?examID=".$_GET['examID']."&examTitle=".$_GET['examTitle']."&start=1&n=$n&qID=$qID&ERROR=1");
         } else {
             // LOOP QUESTION
@@ -47,7 +47,7 @@
                 }
                 
             }
-
+        
             if($n>=$totalQ){
                 $sum = $_SESSION['sum'];
                 header("location:takeTest.php?examID=$examID&examTitle=$examTitle&start=2"); //result 
@@ -108,5 +108,22 @@
             }
         }
     }
+
+    if($_GET['expired']==1){
+        $username=$_SESSION['username'];
+        $examID=$_GET['examID'];
+        $sum=$_SESSION['sum'];
+        
+        header("location:takeTest.php?examID=$examID&examTitle=$examTitle&start=2"); //result 
+        $insertQuery="INSERT INTO mark(studentID,examID,totalMarks,ranking) VALUES ('$username','$examID','$sum',1)";
+        $insert=mysqli_query($conn,$insertQuery);
+        unset($_SESSION['examSessionSTART']);
+        unset($_SESSION['sum']);
+        unset($_SESSION['examSessionEND']);
+    }
+
+
+
+
 ?>
 
