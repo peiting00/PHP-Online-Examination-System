@@ -94,7 +94,8 @@ $username = $_SESSION['username'];
               				<label class="col-md-4 text-right">Total Question <span class="text-danger">*</span></label>
 	              			<div class="col-md-8">
 	                			<select name="total_question" id="total_question" class="form-control" required>
-	                				<option value="5">5 Question</option>
+									<option value="1">1 Question test run</option>
+									<option value="5">5 Question</option>
 	                				<option value="10">10 Question</option>
 									<option value="15">15 Question</option>
 									<option value="20">20 Question</option>
