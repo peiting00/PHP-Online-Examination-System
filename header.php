@@ -16,7 +16,7 @@
 <body>
     <!-- Image and text -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-        <a class="navbar-brand" style="color: #F7F7F7; font-weight: 500;" href="adminHome.php">
+        <a class="navbar-brand" style="color: #F7F7F7; font-weight: 500;" href="#">
             Online Examination System
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
