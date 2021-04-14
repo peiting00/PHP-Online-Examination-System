@@ -26,21 +26,24 @@
             </thead>
             <tbody>
             <?php
-                $resultQuery = mysqli_query($conn, "SELECT a.studentID, b.studentName, SUM(marks) FROM result 
+                $resultQuery = mysqli_query($conn, "SELECT a.studentID, b.studentName, a.totalMarks FROM mark 
                                             AS a INNER JOIN student AS b ON a.studentID = b.studentID
                                             WHERE examID='$id'");
                 $resultRow = mysqli_fetch_row($resultQuery);
                 $i = 1;
-                do {
-                    echo "<tr><td>$i</td>";
-                    echo "<td>{$resultRow[0]}</td>";
-                    echo "<td>{$resultRow[1]}</td>";
-                    echo "<td>{$resultRow[2]}</td>";
-                    echo "<form action='detailList_tec.php?id=$resultRow[0]' method='post'>";
-                    echo "<td><input type='submit' class='btn btn-primary' name='detail' value='Detail'/></td></form></tr>\n";
-                    $resultRow = mysqli_fetch_row($resultQuery);
-                    $i++;
-                } while ($resultRow);
+                if($resultRow) {
+                    do {
+                        echo "<tr><td>$i</td>";
+                        echo "<td>{$resultRow[0]}</td>";
+                        echo "<td>{$resultRow[1]}</td>";
+                        echo "<td>{$resultRow[2]}</td>";
+                        echo "<form action='detailList_tec.php?id=$resultRow[0]' method='post'>";
+                        echo "<td><input type='submit' class='btn btn-primary' name='detail' value='Detail'/></td></form></tr>\n";
+                        $resultRow = mysqli_fetch_row($resultQuery);
+                        $i++;
+                    } while ($resultRow);
+                }
+
             ?>
             </tbody>
         </table>
